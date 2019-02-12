@@ -35,7 +35,7 @@
             <ul class="list-unstyled navbar__list">
                 <?php if($this->session->userdata('level') == "user"){ ?>
                 <li class="active">
-                    <a href="#">
+                    <a href="<?= base_url()?>index.php/admin">
                         <i class="fas fa-tachometer-alt"></i>Beranda</a>
                 </li>
                 <li>
@@ -44,7 +44,7 @@
                 </li>
                 <?php } else if($this->session->userdata('level') == "admin") { ?>
                 <li class="active">
-                    <a href="#">
+                <a href="<?= base_url()?>index.php/admin">
                         <i class="fas fa-tachometer-alt"></i>Beranda</a>
                 </li>
                 <li>
