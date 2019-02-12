@@ -48,12 +48,12 @@
                         <i class="fas fa-tachometer-alt"></i>Beranda</a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="<?= base_url()?>index.php/admin/data_pegawai">
                         <i class="fas fa-table"></i>Pegawai</a>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="<?= base_url()?>index.php/admin/data_penduduk">
                         <i class="fas fa-table"></i>Penduduk</a>
                     </a>
                 </li>

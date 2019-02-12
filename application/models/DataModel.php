@@ -43,7 +43,8 @@ class DataModel extends CI_Model{
         return $query;
     }
 
-    function update($table,$data) {
+    function update($col,$condition,$table,$data) {
+        $this->db->where($col,$condition);
         $query = $this->db->update($table, $data);
         return $query;
     }
