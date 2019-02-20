@@ -22,6 +22,26 @@ class DataModel extends CI_Model{
         $query = $this->db->select($col);
         return $query;
     }
+
+    function from($table){
+        $query = $this->db->from($table);
+        return $query;
+    }
+
+    function order_by($col, $type){
+        $query = $this->db->order_by($col, $type);
+        return $query;
+    }
+
+    function limit($limit){
+        $query = $this->db->limit($limit);
+        return $query;
+    }
+    
+    function distinct(){
+        $query = $this->db->distinct();
+        return $query;
+    }
     
     function getWhere($col,$kon){
         $query = $this->db->where($col,$kon);

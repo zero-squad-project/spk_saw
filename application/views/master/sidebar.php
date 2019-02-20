@@ -59,6 +59,16 @@
                 </li>
                 <li>
                     <a href="#">
+                        <i class="fas fa-table"></i>Kriteria
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-tasks"></i>Penilaian
+                    </a>
+                </li>
+                <li>
+                <a href="<?= base_url()?>index.php/admin/laporan_penerima">
                         <i class="fas fa-archive"></i>Laporan Penerima</a>
                     </a>
                 </li>
