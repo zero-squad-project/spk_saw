@@ -77,7 +77,7 @@
                                                             <i class="zmdi zmdi-edit"></i>
                                                         </button>
                                                         <form action="<?= base_url()?>index.php/Admin/hapus_penduduk">
-                                                        <button class="item" type="submit" data-toggle="tooltip" data-placement="top" title="Hapus">
+                                                        <button class="item btn_del"  type="submit" data-toggle="tooltip" data-placement="top" title="Hapus">
                                                             <i class="zmdi zmdi-delete"></i>
                                                         </button>
                                                         <input type="hidden" name="nik" value="<?= $data->nik?>">
@@ -168,8 +168,8 @@
 						</div>
 					</div>
                 </div>
-                </form>
-			</div>
+    </form>
+	</div>
             <!-- end modal medium -->
             <!-- modal medium -->
             <?php foreach ($penduduk as $data) {?>
@@ -235,3 +235,20 @@
 			</div>
             <!-- end modal medium -->
             <?php }?>
+
+            <div class="modal fade" id="modal_confirm_kriteria" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">System</h3>
+				</div>
+				<div class="modal-body">
+					<center><h4>Are you sure you want to delete this data?</h4></center>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+					<button type="button" class="btn btn-success" id="btn_yes">Yes</button>
+				</div>
+			</div>
+		</div>
+	</div>

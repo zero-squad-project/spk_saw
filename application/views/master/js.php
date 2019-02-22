@@ -21,3 +21,83 @@
 
     <!-- Main JS-->
     <script src="<?= base_url(); ?>assets/js/main.js"></script>
+    <script type="text/javascript">
+    //hapus kriteria
+    $(document).ready(function(){
+	    $('.btn_del').on('click', function(){
+		    var stud_id = $(this).attr('id');
+		    $("#modal_confirm_kriteria").modal('show');
+		    $('#btn_yes').attr('name', stud_id);
+	    });
+	$('#btn_yes').on('click', function(){
+		var id = $(this).attr('name');
+		$.ajax({
+			type: "POST",
+			url: "<?= base_url()?>index.php/Admin/hapus_kriteria",
+			data:{
+				stud_id: id
+			},
+			success: function(){
+				$("#modal_confirm").modal('hide');
+				$(".del_stud" + id).empty();
+				$(".del_stud" + id).html("<td colspan='5'><center>Deleting...</center></td>");
+				setTimeout(function(){
+					$(".del_stud" + id).fadeOut('slow');
+				}, 1000);
+			}
+		});
+	});
+});
+//hapus penduduk
+$(document).ready(function(){
+	    $('.btn_del').on('click', function(){
+		    var stud_id = $(this).attr('id');
+		    $("#modal_confirm_penduduk").modal('show');
+		    $('#btn_yes').attr('name', stud_id);
+	    });
+	$('#btn_yes').on('click', function(){
+		var id = $(this).attr('name');
+		$.ajax({
+			type: "POST",
+			url: "<?= base_url()?>index.php/Admin/hapus_kriteria",
+			data:{
+				stud_id: id
+			},
+			success: function(){
+				$("#modal_confirm").modal('hide');
+				$(".del_stud" + id).empty();
+				$(".del_stud" + id).html("<td colspan='5'><center>Deleting...</center></td>");
+				setTimeout(function(){
+					$(".del_stud" + id).fadeOut('slow');
+				}, 1000);
+			}
+		});
+	});
+});
+//hapus pegawai
+$(document).ready(function(){
+	    $('.btn_del').on('click', function(){
+		    var stud_id = $(this).attr('id');
+		    $("#modal_confirm_pegawai").modal('show');
+		    $('#btn_yes').attr('name', stud_id);
+	    });
+	$('#btn_yes').on('click', function(){
+		var id = $(this).attr('name');
+		$.ajax({
+			type: "POST",
+			url: "<?= base_url()?>index.php/Admin/hapus_kriteria",
+			data:{
+				stud_id: id
+			},
+			success: function(){
+				$("#modal_confirm").modal('hide');
+				$(".del_stud" + id).empty();
+				$(".del_stud" + id).html("<td colspan='5'><center>Deleting...</center></td>");
+				setTimeout(function(){
+					$(".del_stud" + id).fadeOut('slow');
+				}, 1000);
+			}
+		});
+	});
+});
+</script>

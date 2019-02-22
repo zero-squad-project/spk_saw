@@ -177,7 +177,8 @@ class Admin extends CI_Controller
                 'nik' => $nik,
                 'nama' => $nama,
                 'alamat' => $alamat,
-                'tanggungan' => $tanggungan
+                'tanggungan' => $tanggungan,
+                'sudah_dinilai' => 0
             );
             $simpan = $this->DataModel->insert('data_penduduk',$data);
             
@@ -273,7 +274,8 @@ class Admin extends CI_Controller
             $data = array(
                 'nama' => $nama,
                 'tanggungan' => $tanggungan,
-                'alamat' => $alamat
+                'alamat' => $alamat,
+                'sudah_dinilai' => 0
             );
             $simpan = $this->DataModel->update('nik',$nik,'data_penduduk',$data);
             
@@ -352,7 +354,98 @@ class Admin extends CI_Controller
             redirect(base_url('index.php/admin/data_penduduk'));
         }
     }
+    public function data_kriteria()
+    {
+        if (!$this->checkSession()) {
+            $data['login'] = "admin";
+            $this->load->view('master/login', $data);
+         } else {
+            $data['page'] = 'admin/kriteria';
+            $data['profile'] = $this->DataModel->getWhere('nip', $this->session->userdata('nip'));
+            $data['profile'] = $this->DataModel->getData('admin')->row();
+            $data['kriteria'] = $this->DataModel->getData('kriteria')->result();
+            $data['subkriteria'] = $this->DataModel->getData('subkriteria')->result();
+            $data['bobot'] = $this->DataModel->getData('bobot')->result();
+            $this->load->view('master/dashboard', $data);
+        }
+    }
+    public function simpan_kriteria()
+    {
+        if (!$this->checkSession()) {
+            $data['login'] = "admin";
+            $this->load->view('master/login', $data);
+         } else {
+            $this->form_validation->set_rules('nama', 'Nama', 'required');
+            $this->form_validation->set_rules('sifat', 'Sifat', 'required');
+            $this->form_validation->set_rules('bobot', 'Bobot', 'required');
+            $this->form_validation->set_rules('keterangan', 'Keteragan', 'required');
+            $namaKriteria = $this->input->post('nama');
+            $keteranganKriteria = $this->input->post('keterangan');
+            $sifatKriteria = $this->input->post('sifat');
+            $bobotKriteria = $this->input->post('bobot');
+            $data = array(
+                'nama' => $namaKriteria,
+                'keterangan'=>$keteranganKriteria,
+                'sifat' =>$sifatKriteria,
+                'bobot' =>$bobotKriteria
+            );
+            if($this->form_validation->run() == false) {
+                $this->session->set_flashdata('pesan', '<div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                                                        <span class="badge badge-pill badge-danger">Success</span>
+                                                        Gagal Menyimpan Perubahan Pastikan Semua Terisi dengan benar !
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                        </button></div>');
+    
+                redirect(base_url('index.php/admin/data_kriteria'));
+            } else {
+                $simpan = $this->DataModel->insert('kriteria',$data);
+                if($simpan){
+                    $this->session->set_flashdata('pesan', '<div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                                                            <span class="badge badge-pill badge-danger">Success</span>
+                                                            Berhasil menambahkan Kriteria
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button></div>');
 
+                    redirect(base_url('index.php/admin/data_kriteria'));
+                }else{
+                    $this->session->set_flashdata('pesan', '<div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                                                        <span class="badge badge-pill badge-danger">Success</span>
+                                                        Gagal Menyimpan Perubahan Pastikan Semua Terisi dengan benar !
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                        </button></div>');
+    
+                redirect(base_url('index.php/admin/data_kriteria'));
+                }
+            }
+
+
+        }
+    }
+    public function data_penduduk_belum_dinilai()
+    {
+        if (!$this->checkSession()) {
+            $data['login'] = "admin";
+            $this->load->view('master/login', $data);
+         } else {
+            $data['page'] = 'admin/penilaian';
+            $data['profile'] = $this->DataModel->getWhere('nip', $this->session->userdata('nip'));
+            $data['profile'] = $this->DataModel->getData('admin')->row();
+            $data['penduduk'] = $this->DataModel->getWheretbl('data_penduduk','sudah_dinilai',0)->result();
+
+           
+            $this->load->view('master/dashboard', $data);
+         }
+    }
+    public function simpan_penilaian()
+    {
+        $this->form_validation->set_rules('nik', 'NIK', 'required');
+        $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('tanggungan', 'Tanggungan', 'required');
+        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+    }
     public function laporan_penerima()
     {
         if (!$this->checkSession()) {

@@ -47,6 +47,11 @@ class DataModel extends CI_Model{
         $query = $this->db->where($col,$kon);
         return $query;
     }
+    function getWheretbl($tabel,$col,$kon){
+        $this->db->where($col,$kon);
+        $query = $this->db->get($tabel);
+        return $query;
+    }
     
     function getData($table){
         $query = $this->db->get($table);

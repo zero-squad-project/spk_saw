@@ -49,7 +49,7 @@
                                                             <i class="zmdi zmdi-edit"></i>
                                                         </button>
                                                         <form action="<?= base_url()?>index.php/Admin/hapus_pegawai">
-                                                        <button class="item" type="submit" data-toggle="tooltip" data-placement="top" title="Hapus">
+                                                        <button class="item btn_del" type="submit" data-toggle="tooltip" data-placement="top" title="Hapus">
                                                             <i class="zmdi zmdi-delete"></i>
                                                         </button>
                                                         <input type="hidden" name="nip" value="<?= $data->nip?>">

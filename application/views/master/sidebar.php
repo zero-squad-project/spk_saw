@@ -58,12 +58,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="<?= base_url()?>index.php/admin/data_kriteria">
                         <i class="fas fa-table"></i>Kriteria
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="<?= base_url() ?>index.php/admin/data_penduduk_belum_dinilai">
                         <i class="fas fa-tasks"></i>Penilaian
                     </a>
                 </li>
