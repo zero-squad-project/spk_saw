@@ -9,11 +9,11 @@
                     <div class="noti-wrap">
                     <div class="account-wrap">
                         <div class="account-item clearfix js-item-menu">
-                            <div class="image">
+                            <!-- <div class="image">
                                 <img src="<?= base_url(); ?>assets/img/icon/avatar-01.jpg" alt="John Doe" />
-                            </div>
+                            </div> -->
                             <div class="content">
-                                <a class="js-acc-btn" href="#">john doe</a>
+                                <a class="js-acc-btn" href="#"><?= $this->session->userdata('nama');?></a>
                             </div>
                             <div class="account-dropdown js-dropdown">
                                 <div class="account-dropdown__footer">

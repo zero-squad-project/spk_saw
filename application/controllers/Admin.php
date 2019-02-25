@@ -30,6 +30,9 @@ class Admin extends CI_Controller
             $data['page'] = 'admin/home';
             $data['profile'] = $this->DataModel->getWhere('nip', $this->session->userdata('nip'));
             $data['profile'] = $this->DataModel->getData('admin')->row();
+            $data['jml_penduduk'] = $this->DataModel->count_all('data_penduduk');
+            $data['jml_pegawai'] = $this->DataModel->count_all('data_pegawai');
+            $data['penduduk_dinilai'] = $this->DataModel->count_where('data_penduduk','sudah_dinilai',1);
             $this->load->view('master/dashboard', $data);
         }
     }
@@ -49,6 +52,7 @@ class Admin extends CI_Controller
                 "password" => $pass,
             );
             $result = $this->DataModel->Login("admin", $data)->row();
+            $pegawai = $this->DataModel->getWheretbl('data_pegawai','nip',$result->nip)->row();
             if ($result != null) {
                 $id = $result->id;
                 $username = $result->nip;
@@ -57,7 +61,8 @@ class Admin extends CI_Controller
                     'id' => $id,
                     'nip' => $username,
                     'level' => $level,
-                    'status' => "login"
+                    'status' => "login",
+                    'nama' => $pegawai->nama
                 );
                 $this->session->set_userdata($data_session);
                 redirect(base_url('index.php/admin/index'));
@@ -303,7 +308,7 @@ class Admin extends CI_Controller
 
     public function hapus_pegawai()
     {
-        $nip = $this->input->get('nip');
+        $nip = $this->input->post('nip');
        
         $delete = $this->DataModel->delete('nip',$nip,'data_pegawai');
         if($delete){
@@ -330,7 +335,7 @@ class Admin extends CI_Controller
 
     public function hapus_penduduk()
     {
-        $nik = $this->input->get('nik');
+        $nik = $this->input->post('nik');
        
         $delete = $this->DataModel->delete('nik',$nik,'data_penduduk');
         if($delete){
@@ -360,16 +365,35 @@ class Admin extends CI_Controller
             $data['login'] = "admin";
             $this->load->view('master/login', $data);
          } else {
+
+             // KRITERIA DAN SUB KRITERIA
+             $kriteria = $this->DataModel->getData("kriteria")->result();
+             $subKriteria = array();
+             foreach($kriteria as $x){
+                 $idKriteria = $this->DataModel->getWhere('idKriteria', $x->id);
+                 $idKriteria = $this->DataModel->getData('subkriteria')->result();
+                 foreach($idKriteria as $z){
+                     $idKriteriaKey = $z->idKriteria;
+                     $subKriteria[$idKriteriaKey][] = array(
+                         "id_kriteria" => $x->id,
+                         "subDari"     => $x->nama,
+                         "id_sub"      => $z->id,
+                         "nama"        => $z->nama,
+                         "value"       => $z->value
+                     );
+                 }
+             }
             $data['page'] = 'admin/kriteria';
             $data['profile'] = $this->DataModel->getWhere('nip', $this->session->userdata('nip'));
             $data['profile'] = $this->DataModel->getData('admin')->row();
             $data['kriteria'] = $this->DataModel->getData('kriteria')->result();
             $data['subkriteria'] = $this->DataModel->getData('subkriteria')->result();
             $data['bobot'] = $this->DataModel->getData('bobot')->result();
+            $data['subKriteria'] = $subKriteria;
             $this->load->view('master/dashboard', $data);
         }
     }
-    public function simpan_kriteria()
+    public function ubah_kriteria()
     {
         if (!$this->checkSession()) {
             $data['login'] = "admin";
@@ -383,6 +407,7 @@ class Admin extends CI_Controller
             $keteranganKriteria = $this->input->post('keterangan');
             $sifatKriteria = $this->input->post('sifat');
             $bobotKriteria = $this->input->post('bobot');
+            $id = $this->input->post('id');
             $data = array(
                 'nama' => $namaKriteria,
                 'keterangan'=>$keteranganKriteria,
@@ -391,7 +416,7 @@ class Admin extends CI_Controller
             );
             if($this->form_validation->run() == false) {
                 $this->session->set_flashdata('pesan', '<div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
-                                                        <span class="badge badge-pill badge-danger">Success</span>
+                                                        <span class="badge badge-pill badge-success">Success</span>
                                                         Gagal Menyimpan Perubahan Pastikan Semua Terisi dengan benar !
                                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
@@ -399,10 +424,10 @@ class Admin extends CI_Controller
     
                 redirect(base_url('index.php/admin/data_kriteria'));
             } else {
-                $simpan = $this->DataModel->insert('kriteria',$data);
+                $simpan = $this->DataModel->update('id',$id,'kriteria',$data);
                 if($simpan){
                     $this->session->set_flashdata('pesan', '<div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
-                                                            <span class="badge badge-pill badge-danger">Success</span>
+                                                            <span class="badge badge-pill badge-success">Success</span>
                                                             Berhasil menambahkan Kriteria
                                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
@@ -439,13 +464,112 @@ class Admin extends CI_Controller
             $this->load->view('master/dashboard', $data);
          }
     }
+    public function form_penilaian()
+    {
+       
+        if (!$this->checkSession()) {
+            $data['login'] = "admin";
+            $this->load->view('master/login', $data);
+         } else {
+            $nik = $this->input->post('nik');
+            if(empty($nik) || !$nik){
+                redirect(base_url('index.php/admin/data_penduduk_belum_dinilai'));
+            }else{
+
+                // KRITERIA DAN SUB KRITERIA
+            $kriteria = $this->DataModel->getData("kriteria")->result();
+            $subKriteria = array();
+            foreach($kriteria as $x){
+                $idKriteria = $this->DataModel->getWhere('idKriteria', $x->id);
+                $idKriteria = $this->DataModel->getData('subkriteria')->result();
+                foreach($idKriteria as $z){
+                    $idKriteriaKey = $z->idKriteria;
+                    $subKriteria[$idKriteriaKey][] = array(
+                        "id_kriteria" => $x->id,
+                        "subDari"     => $x->nama,
+                        "id_sub"      => $z->id,
+                        "nama"        => $z->nama,
+                        "value"       => $z->value
+                    );
+                }
+            }
+
+            $data['page'] = 'admin/form_penilaian';
+            $data['profile'] = $this->DataModel->getWhere('nip', $this->session->userdata('nip'));
+            $data['profile'] = $this->DataModel->getData('admin')->row();
+            $data['penduduk'] = $this->DataModel->getWheretbl('data_penduduk','nik',$nik)->result();
+            $data['subKriteria'] = $subKriteria;
+            $this->load->view('master/dashboard', $data);
+        }
+           
+            
+         } 
+    }
     public function simpan_penilaian()
     {
-        $this->form_validation->set_rules('nik', 'NIK', 'required');
-        $this->form_validation->set_rules('nama', 'Nama', 'required');
-        $this->form_validation->set_rules('tanggungan', 'Tanggungan', 'required');
-        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        if (!$this->checkSession()) {
+            $data['login'] = "admin";
+            $this->load->view('master/login', $data);
+         } else {
+                
+                $nik = $_POST['nik'];
+                $idKriteria = $_POST['kriteria'];
+                $idSubkriteria =$_POST['subkriteria'];
+
+                $data = array();
+                $index = 0;
+                foreach($nik as $datanik){
+                    array_push(
+                        $data, array(
+                            'nikPenduduk' => $datanik,
+                            'idKriteria' => $idKriteria[$index],
+                            'id_subKriteria' => $idSubkriteria[$index]
+                        
+                        ));
+                        $index++;
+                }
+                $simpan = $this->DataModel->save_batch($data);
+                if ($simpan)
+                {
+                    $data = array(
+                        'sudah_dinilai'=> 1
+                    );
+                   
+                    $update_penduduk = $this->DataModel->update('nik',$this->input->post('realnik'),'data_penduduk',$data);
+                    if($update_penduduk){
+                        $this->session->set_flashdata('pesan', '<div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                                                        <span class="badge badge-pill badge-success">Success</span>
+                                                        Data Berhasil Di input 
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                        </button></div>');
+    
+                        redirect(base_url('index.php/admin/data_penduduk_belum_dinilai'));
+                    }else{
+                        $this->session->set_flashdata('pesan', '<div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                                                        <span class="badge badge-pill badge-danger">Success</span>
+                                                        Gagal Menyimpan Perubahan Pastikan Semua Terisi dengan benar !
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                        </button></div>');
+    
+                        redirect(base_url('index.php/admin/data_penduduk_belum_dinilai'));
+                    }
+                }else{
+                    $this->session->set_flashdata('pesan', '<div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                                                        <span class="badge badge-pill badge-danger">Success</span>
+                                                        Gagal Menyimpan Perubahan Pastikan Semua Terisi dengan benar !
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                        </button></div>');
+    
+                        redirect(base_url('index.php/admin/data_penduduk_belum_dinilai'));
+                }
+            }    
+
     }
+    
+
     public function laporan_penerima()
     {
         if (!$this->checkSession()) {

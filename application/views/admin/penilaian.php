@@ -46,7 +46,12 @@
 																				<td><?= $pbd->alamat; ?></td>
 																				<td>Belum Dinilai</td>
 																				<td>
-																				Nilai Sekarang
+																				<form action="<?= base_url()?>index.php/Admin/form_penilaian" method="post" enctype="multipart/form-data" class="form-horizontal">
+																					<button type="submit" class="btn btn-outline-secondary btn-sm">
+																						Nilai Sekarang
+																					</button>
+																					<input type="hidden" name="nik" value="<?= $pbd->nik;?>">
+																				</form>
 																				</td>
 																			</tr>
 																			<?php $no++;} 

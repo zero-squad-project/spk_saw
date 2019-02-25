@@ -83,5 +83,18 @@ class DataModel extends CI_Model{
     function Login($table, $where) {
         return $this->db->get_where($table, $where);
     }
-    
+    function count_all($table)
+    {
+        return $this->db->count_all($table);
+    }
+    function count_where($table,$kon,$col)
+    {
+ 
+        return $this->db->where($kon, $col)->count_all_results($table);; 
+    }
+    function save_batch($data)
+    {
+        return $this->db->insert_batch('nilai',$data);
+       
+    }
 }

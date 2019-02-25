@@ -76,12 +76,12 @@
                                                         <button class="item" data-toggle="modal" data-placement="top" title="Ubah" data-target="#ubah<?= $data->nik;?>">
                                                             <i class="zmdi zmdi-edit"></i>
                                                         </button>
-                                                        <form action="<?= base_url()?>index.php/Admin/hapus_penduduk">
-                                                        <button class="item btn_del"  type="submit" data-toggle="tooltip" data-placement="top" title="Hapus">
+                                                        
+                                                        <button class="item " data-toggle="modal" data-placement="center" title="Hapus" data-target="#hapus<?= $data->nik;?>">
                                                             <i class="zmdi zmdi-delete"></i>
                                                         </button>
-                                                        <input type="hidden" name="nik" value="<?= $data->nik?>">
-                                                        </form>
+                                                        
+                                                       
                                                     </div>
                                                 </td>
                                             </tr>
@@ -90,8 +90,6 @@
                                     </table>
                                 </div>
                                 <!-- END DATA TABLE -->
-                            
-
                         </div>
                     </div>
                 </div>
@@ -119,136 +117,138 @@
 							</button>
 						</div>
 						<div class="modal-body">
-                       
-                                           
-                                            <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="text-input" class=" form-control-label">Nik</label>
-                                                </div>
-                                                <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="nik" placeholder="misal : 331xxxx" class="form-control">
-                                                    <small class="form-text text-muted">Masukkan Nik Penduduk</small>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="text-input" class=" form-control-label">Nama</label>
-                                                </div>
-                                                <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="nama" placeholder="misal : yatno" class="form-control">
-                                                    <small class="form-text text-muted">Masukkan Nama Penduduk</small>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="text-input" class=" form-control-label">Tanggungan</label>
-                                                </div>
-                                                <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="tanggungan" placeholder="misal : 3" class="form-control">
-                                                    <small class="form-text text-muted">Masukkan Jumlah tanggungan</small>
-                                                </div>
-                                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="text-input" class=" form-control-label">Nik</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input type="text" id="text-input" name="nik" placeholder="misal : 331xxxx" class="form-control">
+                                    <small class="form-text text-muted">Masukkan Nik Penduduk</small>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="text-input" class=" form-control-label">Nama</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input type="text" id="text-input" name="nama" placeholder="misal : yatno" class="form-control">
+                                    <small class="form-text text-muted">Masukkan Nama Penduduk</small>
+                                </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="text-input" class=" form-control-label">Tanggungan</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="text" id="text-input" name="tanggungan" placeholder="misal : 3" class="form-control">
+                                        <small class="form-text text-muted">Masukkan Jumlah tanggungan</small>
+                                    </div>
+                                </div>
                                             
-                                            <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="textarea-input" class=" form-control-label">Alamat</label>
-                                                </div>
-                                                <div class="col-12 col-md-9">
-                                                    <textarea name="alamat" id="textarea-input" rows="4" placeholder="Alamat Penduduk" class="form-control"></textarea>
-                                                </div>
-                                            </div>
-                                                                                 
-                                          
-                                  
-                                        
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-							<button type="submit" class="btn btn-primary">Tambahkan</button>
-						</div>
-					</div>
-                </div>
-    </form>
-	</div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="textarea-input" class=" form-control-label">Alamat</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <textarea name="alamat" id="textarea-input" rows="4" placeholder="Alamat Penduduk" class="form-control"></textarea>
+                                    </div>
+                                </div>          
+						    </div>
+						    <div class="modal-footer">
+							    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+							    <button type="submit" class="btn btn-primary">Tambahkan</button>
+						    </div>
+					    </div>
+                    </div>
+                </form>
+	        </div>
             <!-- end modal medium -->
             <!-- modal medium -->
             <?php foreach ($penduduk as $data) {?>
             <div class="modal fade" id="ubah<?= $data->nik;?>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
-            <form action="<?= base_url()?>index.php/Admin/ubah_penduduk" method="post" enctype="multipart/form-data" class="form-horizontal">
-				<div class="modal-dialog modal-lg" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="mediumModalLabel">Ubah Data Penduduk</h5>
+                <form action="<?= base_url()?>index.php/Admin/ubah_penduduk" method="post" enctype="multipart/form-data" class="form-horizontal">
+				    <div class="modal-dialog modal-lg" role="document">
+					    <div class="modal-content">
+						    <div class="modal-header">
+							    <h5 class="modal-title" id="mediumModalLabel">Ubah Data Penduduk</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<div class="modal-body">
-                                                              
-                        <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="text-input" class=" form-control-label">Nik</label>
-                                                </div>
-                                                <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" value="<?= $data->nik;?>" disabled name="nik" placeholder="misal : 331xxxx" class="form-control">
-                                                    <input type="hidden"  name="nik" value="<?= $data->nik;?>">
-                                                    <small class="form-text text-muted">Masukkan Nik Penduduk</small>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="text-input" class=" form-control-label">Nama</label>
-                                                </div>
-                                                <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" value="<?= $data->nama;?>" name="nama" placeholder="misal : yatno" class="form-control">
-                                                    <small class="form-text text-muted">Masukkan Nama Penduduk</small>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="text-input" class=" form-control-label">Tanggungan</label>
-                                                </div>
-                                                <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" value="<?= $data->tanggungan;?>" name="tanggungan" placeholder="misal : 3" class="form-control">
-                                                    <small class="form-text text-muted">Masukkan Jumlah tanggungan</small>
-                                                </div>
-                                            </div>
+						<div class="modal-body">                                    
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="text-input" class=" form-control-label">Nik</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input type="text" id="text-input" value="<?= $data->nik;?>" disabled name="nik" placeholder="misal : 331xxxx" class="form-control">
+                                    <input type="hidden"  name="nik" value="<?= $data->nik;?>">
+                                    <small class="form-text text-muted">Masukkan Nik Penduduk</small>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="text-input" class=" form-control-label">Nama</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input type="text" id="text-input" value="<?= $data->nama;?>" name="nama" placeholder="misal : yatno" class="form-control">
+                                    <small class="form-text text-muted">Masukkan Nama Penduduk</small>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="text-input" class=" form-control-label">Tanggungan</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input type="text" id="text-input" value="<?= $data->tanggungan;?>" name="tanggungan" placeholder="misal : 3" class="form-control">
+                                    <small class="form-text text-muted">Masukkan Jumlah tanggungan</small>
+                                </div>
+                            </div>
                                             
-                                            <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="textarea-input" class=" form-control-label">Alamat</label>
-                                                </div>
-                                                <div class="col-12 col-md-9">
-                                                    <textarea name="alamat" id="textarea-input" rows="4" placeholder="Alamat Penduduk" class="form-control"><?= $data->alamat;?></textarea>
-                                                </div>
-                                            </div>
-                                  
-                                        
-						        </div>
-						        <div class="modal-footer">
-							        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-							        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-						        </div>
-					        </div>
-                        </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="textarea-input" class=" form-control-label">Alamat</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <textarea name="alamat" id="textarea-input" rows="4" placeholder="Alamat Penduduk" class="form-control"><?= $data->alamat;?></textarea>
+                                </div>
+                            </div>      
+					    </div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+							<button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+						</div>
+					    </div>
+                     </div>
                 </form>
 			</div>
             <!-- end modal medium -->
             <?php }?>
-
-            <div class="modal fade" id="modal_confirm_kriteria" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3 class="modal-title">System</h3>
-				</div>
-				<div class="modal-body">
-					<center><h4>Are you sure you want to delete this data?</h4></center>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-					<button type="button" class="btn btn-success" id="btn_yes">Yes</button>
-				</div>
+            <?php foreach ($penduduk as $data) { ?>
+                <div class="modal fade" id="hapus<?= $data->nik;?>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                <form action="<?= base_url()?>index.php/Admin/hapus_penduduk" method="post" enctype="multipart/form-data" class="form-horizontal">
+				    <div class="modal-dialog modal-md" role="document">
+					    <div class="modal-content">
+						    <div class="modal-header">
+							    <h5 class="modal-title" id="mediumModalLabel">Peringatan</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">     
+                            <h5 class="modal-title" id="mediumModalLabel">Yakin Mau menghapus penduduk <?= $data->nama;?> ?</h5>
+                            <input type="hidden" name="nik" value="<?= $data->nik;?>">
+                        </div>  
+                            
+					    
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+							<button type="submit" class="btn btn-primary">Ya</button>
+						</div>
+					    </div>
+                     </div>
+                     </div>
+                </form>
 			</div>
-		</div>
-	</div>
+            <?php }?>
+    
