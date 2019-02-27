@@ -15,7 +15,7 @@
             <section class="statistic statistic2">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6 col-lg-3">
+                        <div class="col-md-6 col-lg-4">
                             <div class="statistic__item statistic__item--green">
                                 <h2 class="number"><?= $jml_penduduk;?></h2>
                                 <span class="desc">Penduduk Terdaftar</span>
@@ -24,7 +24,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-3">
+                        <div class="col-md-6 col-lg-4">
                             <div class="statistic__item statistic__item--orange">
                                 <h2 class="number"><?= $jml_pegawai; ?></h2>
                                 <span class="desc">Pegawai</span>
@@ -33,7 +33,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-3">
+                        <div class="col-md-6 col-lg-4">
                             <div class="statistic__item statistic__item--blue">
                                 <h2 class="number"><?= $penduduk_dinilai;?></h2>
                                 <span class="desc">Sudah dinilai</span>
@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-3">
+                        <!-- <div class="col-md-6 col-lg-3">
                             <div class="statistic__item statistic__item--red">
                                 <h2 class="number">$1,060,386</h2>
                                 <span class="desc">Lolos</span>
@@ -50,7 +50,7 @@
                                     <i class="zmdi zmdi-money"></i>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </section>

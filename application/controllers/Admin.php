@@ -1,6 +1,6 @@
 <?php
 
-class Admin extends CI_Controller
+class Admin extends MY_Controller
 {
     public function __construct()
     {
@@ -28,6 +28,7 @@ class Admin extends CI_Controller
            $this->load->view('master/login', $data);
         } else {
             $data['page'] = 'admin/home';
+            $data['ap'] = 'admin';
             $data['profile'] = $this->DataModel->getWhere('nip', $this->session->userdata('nip'));
             $data['profile'] = $this->DataModel->getData('admin')->row();
             $data['jml_penduduk'] = $this->DataModel->count_all('data_penduduk');
@@ -45,7 +46,8 @@ class Admin extends CI_Controller
         $pass = $this->input->post('pass');
         //$bag = $this->input->post('bagian');
         if ($this->form_validation->run() == false) {
-            $this->load->view('master/login');
+            $data['login'] = "admin";
+            $this->load->view('master/login', $data); 
         } else {
             $data = array(
                 "nip" => $uname,
@@ -87,6 +89,7 @@ class Admin extends CI_Controller
             $data['login'] = "admin";
             $this->load->view('master/login', $data);
          } else {
+             $data['ap'] = 'pegawai';
              $data['page'] = 'admin/data_pegawai';
              $data['profile'] = $this->DataModel->getWhere('nip', $this->session->userdata('nip'));
              $data['profile'] = $this->DataModel->getData('admin')->row();
@@ -101,6 +104,7 @@ class Admin extends CI_Controller
             $data['login'] = "admin";
             $this->load->view('master/login', $data);
          } else {
+             $data['ap'] = 'penduduk';
              $data['page'] = 'admin/data_penduduk';
              $data['profile'] = $this->DataModel->getWhere('nip', $this->session->userdata('nip'));
              $data['profile'] = $this->DataModel->getData('admin')->row();
@@ -365,7 +369,7 @@ class Admin extends CI_Controller
             $data['login'] = "admin";
             $this->load->view('master/login', $data);
          } else {
-
+            $data['ap'] = 'kriteria';
              // KRITERIA DAN SUB KRITERIA
              $kriteria = $this->DataModel->getData("kriteria")->result();
              $subKriteria = array();
@@ -455,6 +459,7 @@ class Admin extends CI_Controller
             $data['login'] = "admin";
             $this->load->view('master/login', $data);
          } else {
+            $data['ap'] = 'notnilai';
             $data['page'] = 'admin/penilaian';
             $data['profile'] = $this->DataModel->getWhere('nip', $this->session->userdata('nip'));
             $data['profile'] = $this->DataModel->getData('admin')->row();
@@ -471,6 +476,7 @@ class Admin extends CI_Controller
             $data['login'] = "admin";
             $this->load->view('master/login', $data);
          } else {
+            $data['ap'] = 'nilai';
             $nik = $this->input->post('nik');
             if(empty($nik) || !$nik){
                 redirect(base_url('index.php/admin/data_penduduk_belum_dinilai'));
@@ -576,7 +582,7 @@ class Admin extends CI_Controller
             $data['login'] = "admin";
             $this->load->view('master/login', $data);
          } else {
-
+            $data['ap'] = "laporan";
             // KRITERIA DAN SUB KRITERIA
             $kriteria = $this->DataModel->getData("kriteria")->result();
             $subKriteria = array();
@@ -726,6 +732,22 @@ class Admin extends CI_Controller
             // die(json_encode($data));
             $this->load->view('master/dashboard', $data);
         }
+    }
+
+    public function laporan(){
+        if (!$this->checkSession()) {
+            $data['login'] = "admin";
+            $this->load->view('master/login', $data);
+         } else {
+             
+             $data['title'] = 'Data Nilai Karyawan';
+             $data['tgl'] = $this->tgl_indo(date('d-m-Y'));
+             $view = "cetak/laporan_penerima";
+             $data['penduduk'] = $this->DataModel->getWhere('sudah_dinilai',1);
+             $data['penduduk'] = $this->DataModel->getData('data_penduduk')->result_array();
+            //  $this->load->view($view, $data);
+             $this->exportPDFP($view, $data, "Ranking");
+         }
     }
 
 }

@@ -18,3 +18,6 @@
 
     <!-- Main CSS-->
     <link href="<?= base_url(); ?>assets/css/theme.css" rel="stylesheet" media="all">
+    <style rel="stylesheet">
+        .box li { cursor: pointer; }
+    </style>

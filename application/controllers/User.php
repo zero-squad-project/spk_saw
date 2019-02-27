@@ -25,6 +25,7 @@ class User extends CI_Controller
            $data['login'] = "user";
            $this->load->view('master/login', $data);
         } else {
+            $data['ap'] = 'user';
             $data['page'] = 'user/home';
             $data['profile'] = $this->DataModel->getWhere('nik', $this->session->userdata('nik'));
             $data['profile'] = $this->DataModel->getData('data_penduduk')->row();
@@ -41,7 +42,8 @@ class User extends CI_Controller
         $pass = $this->input->post('pass');
 
         if ($this->form_validation->run() == false) {
-            $this->load->view('master/login');
+            $data['login'] = "user";
+            $this->load->view('master/login', $data);
         } else {
             $data = array(
                 "nik" => $uname,

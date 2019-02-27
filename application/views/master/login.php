@@ -28,11 +28,11 @@
                                 <form action="<?= base_url(); ?>index.php/<?=$login?>/login" method="post">
                                     <div class="form-group">
                                         <label>Username</label>
-                                        <input class="au-input au-input--full" type="text" name="uname" placeholder=<?php if($login == "user"){ ?>"Masukkan NIK anda"<?php } else if($login == "admin") { ?>"Masukkan NIP anda"<?php } ?>>
+                                        <input class="au-input au-input--full" type="text" name="uname" required="required" placeholder=<?php if($login == "user"){ ?>"Masukkan NIK anda"<?php } else if($login == "admin") { ?>"Masukkan NIP anda"<?php } ?>>
                                     </div>
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input class="au-input au-input--full" type="password" name="pass" placeholder="Masukkan Password anda">
+                                        <input class="au-input au-input--full" type="password" name="pass" placeholder="Masukkan Password anda" required="required">
                                     </div>
                                     <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
                                 </form>

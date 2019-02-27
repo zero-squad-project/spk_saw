@@ -37,8 +37,7 @@
                                            
                                         <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
                                             <select class="js-select2" name="type">
-                                                <option selected="selected">Expor</option>
-                                                <option value="">Excel</option>
+                                                <option selected="selected">Export</option>
                                                 <option value="">PDF</option>
                                             </select>
                                             <div class="dropDownSelect2"></div>

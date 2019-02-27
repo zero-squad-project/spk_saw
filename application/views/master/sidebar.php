@@ -72,7 +72,7 @@
         <nav class="navbar-sidebar">
             <ul class="list-unstyled navbar__list">
                 <?php if($this->session->userdata('level') == "user"){ ?>
-                <li class="active">
+                <li class="<?php if($ap == "user"){echo "active"; } ?>">
                     <a href="<?= base_url()?>index.php/admin">
                         <i class="fas fa-tachometer-alt"></i>Beranda</a>
                 </li>
@@ -81,31 +81,31 @@
                         <i class="fas fa-archive"></i>Laporan</a>
                 </li>
                 <?php } else if($this->session->userdata('level') == "admin") { ?>
-                <li class="active">
+                <li class="<?php if($ap == "admin"){ echo "active"; } ?>">
                 <a href="<?= base_url()?>index.php/admin">
                         <i class="fas fa-tachometer-alt"></i>Beranda</a>
                 </li>
-                <li>
+                <li class="<?php if($ap == "pegawai"){ echo "active"; } ?>">
                     <a href="<?= base_url()?>index.php/admin/data_pegawai">
                         <i class="fas fa-table"></i>Pegawai</a>
                     </a>
                 </li>
-                <li>
+                <li class="<?php if($ap == "penduduk"){echo "active"; } ?>">
                     <a href="<?= base_url()?>index.php/admin/data_penduduk">
                         <i class="fas fa-table"></i>Penduduk</a>
                     </a>
                 </li>
-                <li>
+                <li class="<?php if($ap == "kriteria"){echo "active"; } ?>">
                     <a href="<?= base_url()?>index.php/admin/data_kriteria">
                         <i class="fas fa-table"></i>Kriteria
                     </a>
                 </li>
-                <li>
+                <li class="<?php if($ap == "notnilai"){echo "active"; } ?>">
                     <a href="<?= base_url() ?>index.php/admin/data_penduduk_belum_dinilai">
                         <i class="fas fa-tasks"></i>Penilaian
                     </a>
                 </li>
-                <li>
+                <li class="<?php if($ap == "laporan"){echo "active"; } ?>">
                 <a href="<?= base_url()?>index.php/admin/laporan_penerima">
                         <i class="fas fa-archive"></i>Laporan Penerima</a>
                     </a>
