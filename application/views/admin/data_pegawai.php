@@ -11,11 +11,10 @@
                         <div class="table-data__tool">
                             <div class="table-data__tool-right">
                                 <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#tambah">
-                                    <i class="zmdi zmdi-plus"></i>Tambah Pegawai</button>   
+                                    <i class="zmdi zmdi-plus"></i>Tambah Pegawai</button>    
                                         <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
                                             <select class="js-select2" name="type">
-                                                <option selected="selected">Expor</option>
-                                                <option value="">Excel</option>
+                                                <option selected="selected">Export</option>
                                                 <option value="">PDF</option>
                                             </select>
                                             <div class="dropDownSelect2"></div>

@@ -34,11 +34,11 @@
                                 <?PHP }else{?>
                                     <div class="form-group">
                                         <label>Username</label>
-                                        <input class="au-input au-input--full" type="text" name="uname" placeholder=<?php if($login == "user"){ ?>"Masukkan NIK anda"<?php } else if($login == "admin") { ?>"Masukkan NIP anda"<?php } ?>>
+                                        <input class="au-input au-input--full" type="text" name="uname" required="required" placeholder=<?php if($login == "user"){ ?>"Masukkan NIK anda"<?php } else if($login == "admin") { ?>"Masukkan NIP anda"<?php } ?>>
                                     </div>
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input class="au-input au-input--full" type="password" name="pass" placeholder="Masukkan Password anda">
+                                        <input class="au-input au-input--full" type="password" name="pass" placeholder="Masukkan Password anda" required="required">
                                     </div>
                                    
                                 <?php }?>

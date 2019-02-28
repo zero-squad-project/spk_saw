@@ -21,4 +21,19 @@
 
     <!-- Main JS-->
     <script src="<?= base_url(); ?>assets/js/main.js"></script>
-    
+    <script>
+        // $(document).ready(function($) {
+        //     $('li').click(function () {
+        //         $('li').addClass('in-active');       // ADD CLASS TO ALL THE TAGS.
+        //         if ($(this).hasClass('in-active')) {    // CHECK IF THE TAG HAS 'in-active' CLASS.
+        //             $(this).removeClass('in-active').addClass('active');
+        //         }
+        //     });
+        // });
+        // $(document).ready(function(){
+        //     $('.box li').click(function() {
+        //         $(this).siblings('li').removeClass('active');
+        //         $(this).addClass('active');
+        //     });
+        // )};
+    </script>
