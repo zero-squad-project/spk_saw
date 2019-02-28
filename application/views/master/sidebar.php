@@ -100,11 +100,6 @@
                     <i class="fas fa-sort-amount-up"></i>Kriteria
                     </a>
                 </li>
-                <!-- <li class="<?php if($ap == "notnilai"){echo "active"; } ?>">
-                    <a href="<?= base_url() ?>index.php/admin/data_penduduk_belum_dinilai">
-                        <i class="fas fa-tasks"></i>Penilaian
-                    </a>
-                </li> -->
                 <li class="<?php if($ap == "laporan"){echo "active"; } ?>">
                 <a href="<?= base_url()?>index.php/admin/laporan_penerima">
                         <i class="fas fa-file-alt"></i>Laporan Penerima</a>
