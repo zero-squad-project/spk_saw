@@ -31,14 +31,7 @@
 																		<?php }?>
                                     								</div>
                                     								<div class="card-body card-block">
-																		<div class="row form-group">
-                                                								<div class="col col-md-3">
-                                                    								<label for="selectSm" class="label label-info">Nama Kriteria</label>
-                                                								</div>
-                                                								<div class="col-12 col-md-9">
-																				<label for="selectSm" class="label label-info">Sub Kriteria</label>
-                                                								</div>
-																		</div>
+																		
 																		<input type="hidden" name="realnik" value="<?= $nik;?>">
 																		<?php 
 																			$index =0;
@@ -73,9 +66,9 @@
                                         								<button type="submit" class="btn btn-primary btn-sm">
                                             								<i class="fa fa-dot-circle-o"></i> Submit
                                         								</button>
-                                        								<button type="reset" class="btn btn-danger btn-sm">
+                                        								<!-- <button type="reset" class="btn btn-danger btn-sm">
                                             								<i class="fa fa-ban"></i> Reset
-                                        								</button>
+                                        								</button> -->
                                     								</div>
                                 								</div>
 																</form>

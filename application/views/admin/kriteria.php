@@ -35,8 +35,8 @@
 														<div class="row m-t-10">
 															<div class="col-md-12">
 																<h3 class="p-b-10">Kriteria</h3>
-																<!-- <button type="button" class="btn btn-outline-secondary btn-sm" 
-																					data-toggle="modal" data-placement="top" title="Ubah" data-target="#tambah">Tambah Kriteria</button> -->
+																<button type="button" class="btn btn-outline-secondary btn-sm" 
+																					data-toggle="modal" data-placement="top" title="Ubah" data-target="#tambah">Tambah Kriteria</button>
 																<div class="table-responsive m-b-40">
 																	<table class="table table-hover">
 																		<thead>
@@ -61,7 +61,9 @@
 																					<!-- <button type="button" class="btn btn-outline-secondary btn-sm btn_del" 																					
 																					>Hapus</button> -->
 																					<button type="button" class="btn btn-outline-secondary btn-sm"
-																					data-toggle="modal" data-placement="top" title="ubah" data-target="#ubah<?= $k->id;?>">Ubah</button></td>
+																					data-toggle="modal" data-placement="top" title="ubah" data-target="#ubah<?= $k->id;?>">Ubah</button>
+																					<button type="button" class="btn btn-outline-secondary btn-sm"
+																					data-toggle="modal" data-placement="top" title="ubah" data-target="#tambah_sub<?= $k->id;?>">Tambah Sub</button></td>
 																			</tr>
 																		<?php $no ++; }?>
 																		</tbody>
@@ -95,6 +97,7 @@
 																											<th>NO</th>
 																											<th>SUB</th>
 																											<th>VALUE</th>
+																											<th>AKSI</th>
 																											
 																									</tr>
 																							</thead>
@@ -106,6 +109,8 @@
 																									<td><?= $no?></td>
 																									<td><?= $data["nama"]; ?></td>
 																									<td><?= $data["value"]?></td>
+																									<td><button type="button" class="btn btn-outline-secondary btn-sm"
+																					data-toggle="modal" data-placement="top" title="ubah" data-target="#ubah_sub<?= $data["id_sub"];?>">Edit</button></td>
 																									
 																								</tr>
 																								<?php $no++;
@@ -163,52 +168,45 @@
 							</button>
 						</div>
 						<div class="modal-body">
-                       
-                                            <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="text-input" class=" form-control-label">Nama</label>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <input type="text" id="text-input" name="nama" placeholder="misal : yatno" class="form-control">
-                                                    <small class="form-text text-muted">Masukkan nama kriteria</small>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="text-input" class=" form-control-label">Keterangan</label>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <input type="text" id="text-input" name="keterangan" placeholder="misal : 3" class="form-control">
-                                                    <small class="form-text text-muted">Masukkan Untuk Kriteria</small>
-                                                </div>
-											</div>
-											
-                                            <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="select" class=" form-control-label">Bobot</label>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <select name="bobot" id="select" class="form-control">
-														<option value="0">Please select</option>
-														<?php foreach ($bobot as $b) {?>
-															 <option value="<?= $b->value; ?>"><?= $b->value; ?></option>
-														<?php }?>
-
-                                                    </select>
-                                                </div>
-											</div>
-											<div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="select" class=" form-control-label">Bobot</label>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <select name="sifat" id="select" class="form-control">
-														<option value="0">Please select</option>
-														<option value="benefit">benefit</option>
-														<option value="cost">cost</option>
-                                                    </select>
-                                                </div>
-											</div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="text-input" class=" form-control-label">Nama</label>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <input type="text" id="text-input" name="nama" placeholder="misal : yatno" class="form-control">
+                                    <small class="form-text text-muted">Masukkan nama kriteria</small>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="text-input" class=" form-control-label">Keterangan</label>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <input type="text" id="text-input" name="keterangan" placeholder="misal : 3" class="form-control">
+                                    <small class="form-text text-muted">Masukkan Untuk Kriteria</small>
+                                </div>
+							</div>
+							<div class="row form-group">
+                                 <div class="col col-md-3">
+                                    <label for="select" class=" form-control-label">Bobot</label>
+                                </div>
+                                <div class="col-12 col-md-6">
+								<input type="text" id="text-input" name="bobot" placeholder="misal : 3" class="form-control">
+                                    <small class="form-text text-muted">Masukkan Untuk Kriteria</small>
+                                </div>
+							</div>
+							<div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="select" class=" form-control-label">Sifat</label>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <select name="sifat" id="select" class="form-control">
+										<option value="0">Please select</option>
+										<option value="benefit">benefit</option>
+										<option value="cost">cost</option>
+                                    </select>
+                                </div>
+							</div>
                                         
 						</div>
 						<div class="modal-footer">
@@ -220,6 +218,81 @@
     </form>
 	</div>
 			<!-- end modal medium -->
+	<?php foreach ($kriteria as $data) {?>
+	<!-- modal medium -->
+    <div class="modal fade" id="tambah_sub<?= $data->id;?>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+    <form action="<?= base_url()?>index.php/Admin/simpan_subkriteria" method="post" enctype="multipart/form-data" class="form-horizontal">
+				<div class="modal-dialog modal-md" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="mediumModalLabel">Tambahkan Sub <?= $data->nama?></h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+						<input type="hidden" name="id[]" value="<?= $data->id;?>">
+						<input type="hidden" name="id[]" value="<?= $data->id;?>">
+						<input type="hidden" name="id[]" value="<?= $data->id;?>">
+						<input type="hidden" name="id[]" value="<?= $data->id;?>">
+                           
+							<div class="row form-group">
+                                 <div class="col-12 col-md-6">
+								 <input type="text" id="text-input" name="nama[]" placeholder="Nama" class="form-control">
+                                    <small class="form-text text-muted">Masukkan Nama Sub ke 1</small>
+                                </div>
+                                <div class="col-12 col-md-6">
+								<input type="text" id="text-input" name="value[]" placeholder="Value" class="form-control">
+                                    <small class="form-text text-muted">Masukkan Value Sub ke 1</small>
+                                </div>
+							</div>
+							<div class="row form-group">
+                                 <div class="col-12 col-md-6">
+								 <input type="text" id="text-input" name="nama[]" placeholder="Nama" class="form-control">
+                                    <small class="form-text text-muted">Masukkan Nama Sub ke 2</small>
+                                </div>
+                                <div class="col-12 col-md-6">
+								<input type="text" id="text-input" name="value[]" placeholder="Value" class="form-control">
+                                    <small class="form-text text-muted">asukkan Value Sub ke 2</small>
+                                </div>
+							</div>
+							<div class="row form-group">
+                                 <div class="col-12 col-md-6">
+								 <input type="text" id="text-input" name="nama[]" placeholder="Nama" class="form-control">
+                                    <small class="form-text text-muted">Masukkan Nama Sub ke 3</small>
+                                </div>
+                                <div class="col-12 col-md-6">
+								<input type="text" id="text-input" name="value[]" placeholder="Value" class="form-control">
+                                    <small class="form-text text-muted">asukkan Value Sub ke 3</small>
+                                </div>
+							</div>
+							<div class="row form-group">
+                                 <div class="col-12 col-md-6">
+								 <input type="text" id="text-input" name="nama[]" placeholder="Nama" class="form-control">
+                                    <small class="form-text text-muted">Masukkan Nama Sub ke 4</small>
+                                </div>
+                                <div class="col-12 col-md-6">
+								<input type="text" id="text-input" name="value[]" placeholder="Value" class="form-control">
+                                    <small class="form-text text-muted">asukkan Value Sub ke 4</small>
+                                </div>
+							</div>
+							
+                                        
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+							<button type="submit" class="btn btn-primary">Tambahkan</button>
+						</div>
+					</div>
+                </div>
+    </form>
+	</div>
+
+			<!-- end modal medium -->
+	<!--sub kriteria--->
+	
+	<!---sub kriteri-->
+	<?php }?>		
 			 <!-- modal medium -->
 			 <?php foreach ($kriteria as $data) {?>
 				<div class="modal fade" id="ubah<?= $data->id;?>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
@@ -279,10 +352,52 @@
                                                     </select>
                                                 </div>
 											</div>
-                                            
-                                                                                 
-                                          
-                                  
+   
+                                        
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+							<button type="submit" class="btn btn-primary">Simpan</button>
+						</div>
+					</div>
+                </div>
+    			</form>
+				</div>
+
+			 <?php } ?>
+
+			 	
+																			<!-- DATA TABLE KRITERIA-->
+<?php 
+
+for( $i =1; $i <= sizeof($subKriteria) ; $i++){
+foreach ($subKriteria[$i] as $data) 
+{ ?>																			
+	<div class="modal fade" id="ubah_sub<?= $data["id_sub"];?>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+    	<form action="<?= base_url()?>index.php/Admin/simpan_subkriteria" method="post" enctype="multipart/form-data" class="form-horizontal">
+				<div class="modal-dialog modal-md" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="mediumModalLabel">Tambahkan Sub </h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+					
+                           
+							<div class="row form-group">
+                                 <div class="col-12 col-md-6">
+								 <input type="text" id="text-input" name="nama[]" placeholder="Nama" value="<?= $data["nama"];?>" class="form-control">
+                                    <small class="form-text text-muted">Nama Sub kriteria  dari <?= $subKriteria[$i][0]["subDari"] ?>   </small>
+                                </div>
+                                <div class="col-12 col-md-6">
+								<input type="text" id="text-input" name="value[]" placeholder="Value" value="<?= $data["value"];?>" class="form-control">
+                                    <small class="form-text text-muted">Value Sub kriteria dari <?= $subKriteria[$i][0]["subDari"] ?>   </small>
+                                </div>
+							</div>
+							
+							
                                         
 						</div>
 						<div class="modal-footer">
@@ -291,24 +406,12 @@
 						</div>
 					</div>
                 </div>
-    </form>
+		</form>
 	</div>
+<?php 
+}
 
-			 <?php } ?>
-						 <!-- end modal medium -->
-	<div class="modal fade" id="modal_confirm_kriteria" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3 class="modal-title">System</h3>
-				</div>
-				<div class="modal-body">
-					<center><h4>Are you sure you want to delete this data?</h4></center>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-					<button type="button" class="btn btn-success" id="btn_yes">Yes</button>
-				</div>
-			</div>
-		</div>
-	</div>
+}?>
+<!-- END DATA TABLE KRITERIA-->
+																
+	

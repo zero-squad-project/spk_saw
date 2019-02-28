@@ -26,6 +26,12 @@
                             <?=$this->session->flashdata('pesan')?>
                             <div class="login-form">
                                 <form action="<?= base_url(); ?>index.php/<?=$login?>/login" method="post">
+                                <?php if($login == 'penduduk'){?>
+                                    <div class="form-group">
+                                        <label>Username</label>
+                                        <input class="au-input au-input--full" type="text" name="nik" placeholder=<?php if($login == "user"){ ?>"Masukkan NIK anda"<?php } else if($login == "admin") { ?>"Masukkan NIP anda"<?php } ?>>
+                                    </div>
+                                <?PHP }else{?>
                                     <div class="form-group">
                                         <label>Username</label>
                                         <input class="au-input au-input--full" type="text" name="uname" placeholder=<?php if($login == "user"){ ?>"Masukkan NIK anda"<?php } else if($login == "admin") { ?>"Masukkan NIP anda"<?php } ?>>
@@ -34,7 +40,9 @@
                                         <label>Password</label>
                                         <input class="au-input au-input--full" type="password" name="pass" placeholder="Masukkan Password anda">
                                     </div>
-                                    <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
+                                   
+                                <?php }?>
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
                                 </form>
                             </div>
                             <!-- </div> -->

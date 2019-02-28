@@ -16,11 +16,19 @@
 
 <body class="animaition">
     <div class="page-wrapper">
+    <?php if($this->session->userdata('level') == "penduduk"){ ?>
+      
+            <!-- //<?php //$this->load->view('master/nav'); ?> -->
+            <?php $this->load->view($page); ?>
+ 
+    <?php }else{?>
         <?php $this->load->view('master/sidebar');?>
         <div class="page-container">
             <?php $this->load->view('master/nav'); ?>
             <?php $this->load->view($page); ?>
         </div>
+    <?php }?>
+        
     </div>
     <?php $this->load->view('master/js'); ?>
 </body>

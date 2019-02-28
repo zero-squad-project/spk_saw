@@ -2,6 +2,11 @@
     <link href="<?= base_url(); ?>assets/css/font-face.css" rel="stylesheet" media="all">
     <link href="<?= base_url(); ?>assets/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
     <link href="<?= base_url(); ?>assets/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="<?= base_url(); ?>assets/vendor/font-awesome-5/css/all.min.css" rel="stylesheet" media="all">
+    <link href="<?= base_url(); ?>assets/vendor/font-awesome-5/css/solid.min.css" rel="stylesheet" media="all">
+    <link href="<?= base_url(); ?>assets/vendor/font-awesome-5/css/brands.min.css" rel="stylesheet" media="all">
+    <link href="<?= base_url(); ?>assets/vendor/font-awesome-5/css/regular.min.css" rel="stylesheet" media="all">
+    <link href="<?= base_url(); ?>assets/vendor/font-awesome-5/css/fontawesome.min.css" rel="stylesheet" media="all">
     <link href="<?= base_url(); ?>assets/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 
     <!-- Bootstrap CSS-->
@@ -18,3 +23,6 @@
 
     <!-- Main CSS-->
     <link href="<?= base_url(); ?>assets/css/theme.css" rel="stylesheet" media="all">
+    <style rel="stylesheet">
+        .box li { cursor: pointer; }
+    </style>

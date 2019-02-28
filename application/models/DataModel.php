@@ -92,9 +92,9 @@ class DataModel extends CI_Model{
  
         return $this->db->where($kon, $col)->count_all_results($table);; 
     }
-    function save_batch($data)
+    function save_batch($table,$data)
     {
-        return $this->db->insert_batch('nilai',$data);
+        return $this->db->insert_batch($table,$data);
        
     }
 }
