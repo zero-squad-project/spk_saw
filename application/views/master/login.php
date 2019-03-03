@@ -52,7 +52,7 @@
                                 Didesa Laren Menggunakan metode Simple Additive Weightning (SAW)</p>
                             <div class="login-logo">
                                 <a href="#">
-                                    <img src="<?= base_url(); ?>assets/img/amikom_logo.png" width="200px" alt="CoolAdmin">
+                                    <img src="<?= base_url(); ?>assets/img/brebes_logo.png" width="200px" alt="CoolAdmin">
                                 </a>
                             </div>
                             <p class="text-white text-center" style="margin-top:0px;margin-bottom:0px">

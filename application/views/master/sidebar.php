@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="header-mobile-inner">
                 <!-- <a class="logo" href="#"> -->
-                    <!-- <img src="<?=base_url();?>assets/img/icon/logo.png" alt="CoolAdmin" /> -->
+                    <img src="<?=base_url();?>assets/img/brebes_logo.png" width="46px" height="52px" alt="CoolAdmin" />
                     <h3>SPK Bekerja</h3>
                 <!-- </a> -->
                 <button class="hamburger hamburger--slider" type="button">
@@ -64,8 +64,8 @@
 <aside class="menu-sidebar d-none d-lg-block">
     <div class="logo">
         <!-- <a href="#"> -->
-            <!-- <img src="<?=base_url();?>assets/img/icon/logo.png" alt="Cool Admin" /> -->
-            <h3>SPK Bekerja</h3>
+            <img src="<?=base_url();?>assets/img/brebes_logo.png" width="46px" height="52px" alt="CoolAdmin" />
+            <h3 style="margin-left:10px">SPK Bekerja</h3>
         <!-- </a> -->
     </div>
     <div class="menu-sidebar__content js-scrollbar1">
