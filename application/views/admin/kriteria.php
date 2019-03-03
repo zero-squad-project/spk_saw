@@ -19,7 +19,7 @@
 													<div class="nav nav-tabs" id="nav-tab" role="tablist">
 
 														<a class="nav-item nav-link active" id="custom-nav-perangkingan-tab" data-toggle="tab" href="#custom-nav-kriteria" role="tab" aria-controls="custom-nav-perangkingan"
-														 aria-selected="true">Krieria</a>
+														 aria-selected="true">Kriteria</a>
 
 														<a class="nav-item nav-link" id="custom-nav-kriteria-tab" data-toggle="tab" href="#custom-nav-subkriteria" role="tab" aria-controls="custom-nav-kriteria"
 														 aria-selected="false">Sub Kriteria</a>
@@ -80,8 +80,8 @@
 															<div class="row m-t-10">
 																	<div class="col-md-12">
 																			
-																			<!-- DATA TABLE KRITERIA-->
-																			<?php 
+																				<!-- DATA TABLE KRITERIA-->
+																				<?php 
 																			$index ;
 																			$i ;
 																				for( $i =1; $i <= sizeof($subKriteria) ; $i++){

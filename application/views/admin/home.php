@@ -11,6 +11,15 @@
 
                         </div>
                     </div> -->
+                    <div class="au-card recent-report">
+                        <div class="au-card-inner">
+                            <h3 class="title-2">Selamat Datang</h3>
+                          
+                            <p>Terus apa maning yah?</p>
+                            
+                        </div>
+                    </div>
+              
                     <!-- STATISTIC-->
             <section class="statistic statistic2">
                 <div class="container">
@@ -55,8 +64,7 @@
                 </div>
             </section>
             <!-- END STATISTIC-->
-                </div>
-            </div>
+        
             <div class="row">
                 <div class="col-md-12">
                     <div class="copyright">

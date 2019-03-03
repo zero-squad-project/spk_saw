@@ -84,6 +84,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
+                                            <tr class="spacer"></tr>
                                             <?php }?>
                                         </tbody>
                                     </table>
@@ -139,7 +140,7 @@
                                         <label for="text-input" class=" form-control-label">Tanggungan</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" id="text-input" name="tanggungan" placeholder="misal : 3" class="form-control">
+                                        <input type="number" id="text-input" name="tanggungan" placeholder="misal : 3" class="form-control">
                                         <small class="form-text text-muted">Masukkan Jumlah tanggungan</small>
                                     </div>
                                 </div>
@@ -153,6 +154,38 @@
                                     </div>
                                 </div>          
 						    </div>
+                            <div class="card">
+                                    <div class="card-header">
+										
+										<strong>Form Penilaian </strong>
+										
+                                    </div>
+                                    <div class="card-body card-block">
+									
+										<?php 
+											$index =0;
+										
+												for( $i =1; $i <= sizeof($subKriteria) ; $i++){
+										?>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="selectSm" class=" form-control-label"><?= $subKriteria[$i][0]["subDari"] ?></label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+											
+												<input type="hidden" name="kriteria[]" value="<?= $subKriteria[$i][$index]["id_kriteria"] ?>">
+												<select name="subkriteria[]" id="SelectLm" class="form-control-sm form-control">
+														<option value="0">Pilih </option>
+														<?php $no = 1; foreach ($subKriteria[$i] as $data) 	{ ?>
+                                                        <option value="<?= $data["id_sub"]?>"><?= $data["nama"]; ?></option>
+														<?php $no++; } ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+										<?php }?>
+                                    </div>
+                                    
+                                </div>
 						    <div class="modal-footer">
 							    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
 							    <button type="submit" class="btn btn-primary">Tambahkan</button>

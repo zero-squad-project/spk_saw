@@ -56,6 +56,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
+                                            <tr class="spacer"></tr>
                                             <?php }?>
                                         </tbody>
                                     </table>
