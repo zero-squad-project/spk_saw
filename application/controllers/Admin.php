@@ -213,7 +213,7 @@ class Admin extends MY_Controller
                 'nama' => $nama,
                 'alamat' => $alamat,
                 'tanggungan' => $tanggungan,
-                'sudah_dinilai' => 0
+                'sudah_dinilai' => 1
             );
              $this->DataModel->getWhere('nik',$nik);
              $cek_nik = $this->DataModel->getData('data_penduduk')->row();
@@ -932,8 +932,9 @@ class Admin extends MY_Controller
              $view = "cetak/laporan_penerima";
              $data['penduduk'] = $this->DataModel->getWhere('sudah_dinilai',1);
              $data['penduduk'] = $this->DataModel->getData('data_penduduk')->result_array();
-             $this->load->view($view, $data);
-             $this->exportPDFP($view, $data, "Ranking");
+            //var_dump($data);
+              $this->load->view($view, $data);
+            //  $this->exportPDFP($view, $data, "Ranking");
          }
     }
 
