@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: 10 Feb 2019 pada 12.01
--- Versi Server: 5.7.23-0ubuntu0.18.04.1
--- PHP Version: 7.2.10-0ubuntu0.18.04.1
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 03 Mar 2019 pada 04.48
+-- Versi server: 10.1.32-MariaDB
+-- Versi PHP: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -43,6 +45,27 @@ INSERT INTO `admin` (`id`, `nip`, `password`, `lastlogin`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `bobot`
+--
+
+CREATE TABLE `bobot` (
+  `id` int(10) NOT NULL,
+  `value` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `bobot`
+--
+
+INSERT INTO `bobot` (`id`, `value`) VALUES
+(1, '0'),
+(2, '0.33'),
+(3, '0.66'),
+(4, '1');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `data_pegawai`
 --
 
@@ -69,15 +92,18 @@ CREATE TABLE `data_penduduk` (
   `nik` varchar(20) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `tanggungan` int(11) NOT NULL,
-  `alamat` text NOT NULL
+  `alamat` text NOT NULL,
+  `sudah_dinilai` int(2) NOT NULL,
+  `status` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `data_penduduk`
 --
 
-INSERT INTO `data_penduduk` (`nik`, `nama`, `tanggungan`, `alamat`) VALUES
-('33123456', 'Zaenurrochman', 3, 'Jln Pramuka desa kalisari RT07 RW 02');
+INSERT INTO `data_penduduk` (`nik`, `nama`, `tanggungan`, `alamat`, `sudah_dinilai`, `status`) VALUES
+('3302193107980006', 'Imam Tahyudin', 4, 'Jl.PPNH no 21 rt:03 rw 01\r\nDesa bojongslawi kec.lohbener', 1, ''),
+('33123456', 'Zaenurrochman', 3, 'Jln Pramuka desa kalisari RT07 RW 02', 0, '');
 
 -- --------------------------------------------------------
 
@@ -89,9 +115,19 @@ CREATE TABLE `kriteria` (
   `id` int(11) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `keterangan` text NOT NULL,
-  `sifat` varchar(10) NOT NULL,
+  `sifat` enum('benefit','cost') NOT NULL,
   `bobot` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `kriteria`
+--
+
+INSERT INTO `kriteria` (`id`, `nama`, `keterangan`, `sifat`, `bobot`) VALUES
+(1, 'Pendapatan Orang Tua', 'Semakin kecil semakin bagus', 'cost', 0.35),
+(2, 'Jumlah Tanggungan', 'Semakin besar semakin bagus', 'benefit', 0.3),
+(3, 'Luas Lahan (m2)', 'Semakin kecil semakin bagus', 'cost', 0.2),
+(4, 'Jenis Lantai', 'Semakin besar semakin bagus', 'benefit', 0.15);
 
 -- --------------------------------------------------------
 
@@ -100,10 +136,21 @@ CREATE TABLE `kriteria` (
 --
 
 CREATE TABLE `nilai` (
+  `id` int(11) NOT NULL,
   `nikPenduduk` varchar(20) NOT NULL,
   `idKriteria` int(11) NOT NULL,
-  `nilai` float NOT NULL
+  `id_subKriteria` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `nilai`
+--
+
+INSERT INTO `nilai` (`id`, `nikPenduduk`, `idKriteria`, `id_subKriteria`) VALUES
+(49, '3302193107980006', 1, 2),
+(50, '3302193107980006', 2, 5),
+(51, '3302193107980006', 3, 10),
+(52, '3302193107980006', 4, 14);
 
 -- --------------------------------------------------------
 
@@ -117,6 +164,28 @@ CREATE TABLE `subkriteria` (
   `nama` varchar(20) NOT NULL,
   `value` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `subkriteria`
+--
+
+INSERT INTO `subkriteria` (`id`, `idKriteria`, `nama`, `value`) VALUES
+(1, 1, '< 600.000', 1),
+(2, 1, '600.000 - 800.000', 0.66),
+(3, 1, '800.000 - 1.000.000', 0.33),
+(4, 1, '>= 1.000.000', 0),
+(5, 2, '0 - 1', 0),
+(6, 2, '2 - 3', 0.33),
+(7, 2, '4 - 5', 0.66),
+(8, 2, '> 5', 1),
+(9, 3, '< 70', 1),
+(10, 3, '70 - 90', 0.66),
+(11, 3, '90 - 110', 0.33),
+(12, 3, '> 110', 0),
+(13, 4, '1 - 2', 0),
+(14, 4, '3 - 4', 0.33),
+(15, 4, '5-6', 0.66),
+(16, 4, '>7', 1);
 
 -- --------------------------------------------------------
 
@@ -143,75 +212,99 @@ INSERT INTO `user` (`id`, `nik`, `password`, `lastlogin`) VALUES
 --
 
 --
--- Indexes for table `admin`
+-- Indeks untuk tabel `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_adminPegawai` (`nip`);
 
 --
--- Indexes for table `data_pegawai`
+-- Indeks untuk tabel `bobot`
+--
+ALTER TABLE `bobot`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `data_pegawai`
 --
 ALTER TABLE `data_pegawai`
   ADD PRIMARY KEY (`nip`);
 
 --
--- Indexes for table `data_penduduk`
+-- Indeks untuk tabel `data_penduduk`
 --
 ALTER TABLE `data_penduduk`
   ADD PRIMARY KEY (`nik`);
 
 --
--- Indexes for table `kriteria`
+-- Indeks untuk tabel `kriteria`
 --
 ALTER TABLE `kriteria`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `nilai`
+-- Indeks untuk tabel `nilai`
 --
 ALTER TABLE `nilai`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_KriteriaNilai` (`idKriteria`),
-  ADD KEY `fk_nilaiPenduduk` (`nikPenduduk`);
+  ADD KEY `fk_nilaiPenduduk` (`nikPenduduk`),
+  ADD KEY `fk_nilaiSubkriteria` (`id_subKriteria`);
 
 --
--- Indexes for table `subkriteria`
+-- Indeks untuk tabel `subkriteria`
 --
 ALTER TABLE `subkriteria`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_subKriteria` (`idKriteria`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_userNik` (`nik`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT untuk tabel `admin`
 --
 ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
--- AUTO_INCREMENT for table `kriteria`
+-- AUTO_INCREMENT untuk tabel `bobot`
+--
+ALTER TABLE `bobot`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT untuk tabel `kriteria`
 --
 ALTER TABLE `kriteria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
--- AUTO_INCREMENT for table `subkriteria`
+-- AUTO_INCREMENT untuk tabel `nilai`
+--
+ALTER TABLE `nilai`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+
+--
+-- AUTO_INCREMENT untuk tabel `subkriteria`
 --
 ALTER TABLE `subkriteria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
@@ -226,8 +319,9 @@ ALTER TABLE `admin`
 -- Ketidakleluasaan untuk tabel `nilai`
 --
 ALTER TABLE `nilai`
-  ADD CONSTRAINT `fk_KriteriaNilai` FOREIGN KEY (`idKriteria`) REFERENCES `kriteria` (`id`),
-  ADD CONSTRAINT `fk_nilaiPenduduk` FOREIGN KEY (`nikPenduduk`) REFERENCES `data_penduduk` (`nik`);
+  ADD CONSTRAINT `fk_KriteriaNilai` FOREIGN KEY (`idKriteria`) REFERENCES `kriteria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_nilaiPenduduk` FOREIGN KEY (`nikPenduduk`) REFERENCES `data_penduduk` (`nik`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_nilaiSubkriteria` FOREIGN KEY (`id_subKriteria`) REFERENCES `subkriteria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `subkriteria`
@@ -240,6 +334,7 @@ ALTER TABLE `subkriteria`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `fk_userNik` FOREIGN KEY (`nik`) REFERENCES `data_penduduk` (`nik`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
