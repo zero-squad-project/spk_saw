@@ -110,23 +110,24 @@
             <th scope="col">Jenis Lantai</th>
         </thead>
         <?php
-                $no = 1;
-                $i = 0;
-                    foreach ($penduduk as $key) {
-                        ?>
+            $no = 1;
+            $i = 0;
+            foreach ($hasilAkhir as $HAkey => $HAvalue) {
+        ?>
         <tr>
-            <th scope="row"><?php echo $no++ ?></th>
-            <td><?php echo $key['nik'] ?></td>
-            <td><?php echo $key['nama'] ?></td>
-            <td><?php  ?></td>
-            <td><?php  ?></td>
-            <td><?php  ?></td>
-            <td><?php  ?></td>
+            <th scope="row"><?php echo $no; ?></th>
+            <td><?php echo $datPen[$HAkey]['nik']?></td>
+            <td><?php echo $datPen[$HAkey]['nama']; ?></td>
+            <?php $index = 0; foreach($kriteria as $k){ ?>
+			    <td><?= $dataNilaiPendudukXXX["nik-".$datPen[$HAkey]['nik']][$index]["namaSubkategori"]; ?>
+				</td>
+			<?php $index++; } ?>
         </tr>
         <?php
-                        $i++;
-                    }
-                ?>
+            $i++;
+            $no++;
+        }
+        ?>
     </table>
     <div class="right" align='right' style="margin-top: 20px;">
         <p>Kasi Pemerintahan</p>

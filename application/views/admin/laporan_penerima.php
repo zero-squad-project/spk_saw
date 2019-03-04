@@ -56,7 +56,10 @@
 																		<div class="dropDownSelect2"></div>
 																	</div> -->
 																	<!-- <div class="p-b-10"> -->
-																		<a href="<?=base_url();?>index.php/admin/laporan" class="btn btn-secondary m-b-10" style="float :right">Export PDF</a>
+																	<form action="<?=base_url();?>index.php/admin/laporan_penerima" method="POST">
+																		<input type="submit" name="export" value="EXPORT PDF" class="btn btn-secondary m-b-10" style="float :right">
+																	</form>
+																		<!-- <a href="<?=base_url();?>index.php/admin/laporan" class="btn btn-secondary m-b-10" style="float :right">Export PDF</a> -->
 																	<!-- </div> -->
 																</div>
 															</div>
@@ -71,14 +74,14 @@
 																		</tr>
 																	</thead>
 																	<tbody>
-																		<?php $no = 1; foreach($hasilAkhir as $HAkey => $HAvalue) { ?>
+																		<?php $no = 1; if($hasilAkhir != null){foreach($hasilAkhir as $HAkey => $HAvalue) { ?>
 																		<tr>
 																			<td><?= $no ?></td>
 																			<td><?= $namaSamaNik[$HAkey]; ?></td>
 																			<td><?= $HAvalue; ?></td>
 																			<td><?= $no; ?></td>
 																		</tr>
-																		<?php $no++; } ?>
+																		<?php $no++; }}	 ?>
 																	</tbody>
 																</table>
 															</div>
