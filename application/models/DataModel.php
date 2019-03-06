@@ -97,4 +97,9 @@ class DataModel extends CI_Model{
         return $this->db->insert_batch($table,$data);
        
     }
+
+    function update_batch($table,$data,$id){
+        return $this->db->update_batch($table,$data,$id);
+    }
+
 }
