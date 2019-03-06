@@ -15,7 +15,7 @@
                         <div class="au-card-inner">
                             <h3 class="title-2">Selamat Datang</h3>
                           
-                            <p>Terus apa maning yah?</p>
+                           
                             
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                         <div class="col-md-6 col-lg-4">
                             <div class="statistic__item statistic__item--orange">
                                 <h2 class="number"><?= $jml_pegawai; ?></h2>
-                                <span class="desc">Pegawai</span>
+                                <span class="desc">Admin</span>
                                 <div class="icon">
                                     <i class="zmdi zmdi-shopping-cart"></i>
                                 </div>

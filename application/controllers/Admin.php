@@ -195,8 +195,12 @@ class Admin extends MY_Controller
                 'nama' => $nama,
                 'jabatan' => $jabatan
             );
+            $dataa = array(
+                'nip' => $nip,
+                'password' => 'admin'
+            );
             $simpan = $this->DataModel->insert('data_pegawai',$data);
-            
+            $simpan = $this->DataModel->insert('admin',$dataa);
             if($simpan){
                 $this->session->set_flashdata('pesan', '<div class="sufee-alert alert with-close alert-primary alert-dismissible fade show">
                                                         <span class="badge badge-pill badge-primary">Success</span>
@@ -247,6 +251,10 @@ class Admin extends MY_Controller
                 'tanggungan' => $tanggungan,
                 'sudah_dinilai' => 1
             );
+            $dataa = array(
+                'nik' => $nik,
+                'password' => 'user'
+            );
              $this->DataModel->getWhere('nik',$nik);
              $cek_nik = $this->DataModel->getData('data_penduduk')->row();
             if($cek_nik > 0){
@@ -260,7 +268,7 @@ class Admin extends MY_Controller
             redirect(base_url('index.php/admin/data_penduduk'));
             }else{
                 $simpan = $this->DataModel->insert('data_penduduk',$data);
-            
+                $simpan = $this->DataModel->insert('user',$dataa);
             if($simpan){
                  //nilai
                    // $nik = $_POST['nik'];
@@ -451,6 +459,7 @@ class Admin extends MY_Controller
     public function hapus_pegawai()
     {
         $nip = $this->input->post('nip');
+        $delete = $this ->DataModel->delete('nip',$nip,'admin');
        
         $delete = $this->DataModel->delete('nip',$nip,'data_pegawai');
         if($delete){
@@ -835,10 +844,10 @@ class Admin extends MY_Controller
 
     public function laporan_penerima()
     {
-        if (!$this->checkSession()) {
-            $data['login'] = "admin";
-            $this->load->view('master/login', $data);
-         } else {
+        // if (!$this->checkSession()) {
+            // $data['login'] = "admin";
+            // $this->load->view('master/login', $data);
+        //  } else {
             $data['ap'] = "laporan";
             // KRITERIA DAN SUB KRITERIA
             $kriteria = $this->DataModel->getData("kriteria")->result();
@@ -1013,7 +1022,7 @@ class Admin extends MY_Controller
             }
             // die(json_encode($data));
             
-        }
+        // }
     }
 
 }

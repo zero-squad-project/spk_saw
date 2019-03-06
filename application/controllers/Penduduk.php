@@ -25,10 +25,10 @@ class Penduduk extends CI_Controller
            $data['login'] = "penduduk";
            $this->load->view('master/login', $data);
         } else {
-            $data['page'] = 'penduduk/home';
+            // $data['page'] = 'penduduk/home';
             $data['profile'] = $this->DataModel->getWhere('nik', $this->session->userdata('nik'));
             $data['profile'] = $this->DataModel->getData('data_penduduk')->result();
-            $this->load->view('master/dashboard', $data);
+            $this->load->view('user/home_new', $data);
         }
     }
 

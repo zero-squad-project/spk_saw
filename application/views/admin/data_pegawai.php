@@ -7,17 +7,12 @@
                         <div class="col-md-12">
                         <?=$this->session->flashdata('pesan')?>
                         <!-- DATA TABLE -->
-                        <h3 class="title-5 m-b-35">Data Pegawai</h3>
+                        <h3 class="title-5 m-b-35">Data Admin</h3>
                         <div class="table-data__tool">
                             <div class="table-data__tool-right">
                                 <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#tambah">
-                                    <i class="zmdi zmdi-plus"></i>Tambah Pegawai</button>    
-                                        <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-                                            <select class="js-select2" name="type">
-                                                <option selected="selected">Export</option>
-                                                <option value="">PDF</option>
-                                            </select>
-                                            <div class="dropDownSelect2"></div>
+                                    <i class="zmdi zmdi-plus"></i>Tambah Admin</button>    
+
                                         </div>
                                     </div>
                                 </div>
@@ -25,7 +20,7 @@
                                     <table class="table table-data2">
                                         <thead>
                                             <tr>
-                                                <th>Nip</th>
+                                                <th>NIP</th>
                                                 <th>Nama</th>
                                                 <th>Jabatan</th>
                                                 <th>Aksi</th>
@@ -85,7 +80,7 @@
 				    <div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="mediumModalLabel">Tambahkan Data Pegawai</h5>
+							<h5 class="modal-title" id="mediumModalLabel">Tambahkan Data Admin</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -93,11 +88,11 @@
 						<div class="modal-body">
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Nip</label>
+                                    <label for="text-input" class=" form-control-label">NIP</label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <input type="text" id="text-input" name="nip" placeholder="misal : 033333" class="form-control">
-                                    <small class="form-text text-muted">Masukkan Nip Pegawai</small>
+                                    <small class="form-text text-muted">Masukkan NIP Admin</small>
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -106,7 +101,7 @@
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <input type="text" id="text-input" name="nama" placeholder="misal : yanto" class="form-control">
-                                    <small class="form-text text-muted">Masukkan Nama Pegawai</small>
+                                    <small class="form-text text-muted">Masukkan Nama Admin</small>
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -147,7 +142,7 @@
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="mediumModalLabel">Tambahkan Data Pegawai</h5>
+							<h5 class="modal-title" id="mediumModalLabel">Ubah Data Admin</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -161,7 +156,7 @@
                                     <input type="text" disabled id="text-input" value="<?= $data->nip;?>" placeholder="misal : 033333" class="form-control">
                                     <input type="hidden"  name="nip" value="<?= $data->nip;?>">
                                                     
-                                    <small class="form-text text-muted">Masukkan Nip Pegawai</small>
+                                    <small class="form-text text-muted">Masukkan NIP Admin</small>
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -170,7 +165,7 @@
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <input type="text" id="text-input" value="<?= $data->nama;?>" name="nama" placeholder="misal : trian" class="form-control">
-                                    <small class="form-text text-muted">Masukkan Nama Pegawai</small>
+                                    <small class="form-text text-muted">Masukkan Nama Admin</small>
                                 </div>
                             </div>                                         
                             <div class="row form-group">
@@ -216,7 +211,7 @@
 							</button>
 						</div>
 						<div class="modal-body">     
-                            <h5 class="modal-title" id="mediumModalLabel">Yakin Mau menghapus pegawai <?= $data->nama;?> ?</h5>
+                            <h5 class="modal-title" id="mediumModalLabel">Yakin Mau menghapus admin <?= $data->nama;?> ?</h5>
                             <input type="hidden" name="nip" value="<?= $data->nip;?>">
                         </div>  
                             

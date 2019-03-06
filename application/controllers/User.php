@@ -26,10 +26,10 @@ class User extends CI_Controller
            $this->load->view('master/login', $data);
         } else {
             $data['ap'] = 'user';
-            $data['page'] = 'user/home';
+            // $data['page'] = 'user/home';
             $data['profile'] = $this->DataModel->getWhere('nik', $this->session->userdata('nik'));
             $data['profile'] = $this->DataModel->getData('data_penduduk')->row();
-            $this->load->view('master/dashboard', $data);
+            $this->load->view('user/home_new', $data);
         }
     }
 
