@@ -14,9 +14,9 @@
     <?php $this->load->view('master/css') ?>
 </head>
 
-<body class="animaition">
+<body class="animaition" style="background: #d4d3d3">
     <div class="page-wrapper">
-        <div class="page-content--bge5">
+        <div class="page-content">
             <div class="container">
                 <div class="col-lg-12" style="padding-top: 50px; padding-bottom: 150px;">
                     <div class="row">

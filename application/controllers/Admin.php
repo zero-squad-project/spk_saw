@@ -844,10 +844,10 @@ class Admin extends MY_Controller
 
     public function laporan_penerima()
     {
-        // if (!$this->checkSession()) {
-            // $data['login'] = "admin";
-            // $this->load->view('master/login', $data);
-        //  } else {
+        if (!$this->checkSession()) {
+            $data['login'] = "admin";
+            $this->load->view('master/login', $data);
+         } else {
             $data['ap'] = "laporan";
             // KRITERIA DAN SUB KRITERIA
             $kriteria = $this->DataModel->getData("kriteria")->result();
@@ -1022,7 +1022,7 @@ class Admin extends MY_Controller
             }
             // die(json_encode($data));
             
-        // }
+        }
     }
 
 }

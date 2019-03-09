@@ -97,11 +97,39 @@
                             <!-- TOP CAMPAIGN-->
                             <div class="top-campaign">
                                 <!-- <center> -->
-                                    <h3 class="title-3">Hasil Penilaian Warga Miskin </h3>
-                                    <p class="m-t-10">Untuk melihat hasil penilaian warga miskin dapat mengklik tombol lihat laporan yang berada dibawah, Terima kasih</p>
-                                    <form action="<?=base_url();?>index.php/admin/laporan_penerima" method="POST">
-                                            <input type="submit" name="export" value="Lihat Hasil Penilaian" class="btn btn-info m-t-20">
-                                    </form>
+                                <h3 class="title-3">Hasil Penilaian Warga Miskin </h3>
+                                <div class="row m-t-10">
+                                    <div class="col-md-12">
+                                        <div class="table-responsive m-b-40">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr class="bg-dark" style="color: #fff;">
+                                                        <th>No</th>
+                                                        <th>Nama</th>
+                                                        <th>Nilai</th>
+                                                        <th>Ranking</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php $no = 1; if($hasilAkhir != null){foreach($hasilAkhir as $HAkey => $HAvalue) { ?>
+                                                    <tr>
+                                                        <td><?= $no ?></td>
+                                                        <td><?= $namaSamaNik[$HAkey]; ?></td>
+                                                        <td><?= $HAvalue; ?></td>
+                                                        <td><?= $no; ?></td>
+                                                    </tr>
+                                                    <?php $no++; }}	 ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="m-t-10">Untuk melihat hasil penilaian warga miskin dapat mengklik tombol lihat
+                                    laporan yang berada dibawah, Terima kasih</p>
+                                <form action="<?=base_url();?>index.php/user/index" method="POST">
+                                    <input type="submit" name="export" value="Lihat Hasil Penilaian"
+                                        class="btn btn-info m-t-20">
+                                </form>
                                 <!-- </center> -->
                             </div>
                             <!-- END TOP CAMPAIGN-->
@@ -116,7 +144,7 @@
                             <div class="copyright">
                                 <p>Copyright © 2019 Wildatul Aulia All rights reserved. Template by <a
                                         href="https://colorlib.com">Colorlib</a>.</p>
-                                        <a href="http://laren.desa.id/">http://laren.desa.id/<a>
+                                <a href="http://laren.desa.id/">http://laren.desa.id/<a>
                             </div>
                         </div>
                     </div>
