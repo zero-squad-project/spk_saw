@@ -92,49 +92,59 @@
                             <!-- <h3 class="title-5 m-b-35">statistics</h3> -->
                         </div>
                     </div>
+                   
+                    
                     <div class="row">
-                        <div class="col-md-12 col-lg-12">
-                            <!-- TOP CAMPAIGN-->
-                            <div class="top-campaign">
-                                <!-- <center> -->
-                                <h3 class="title-3">Hasil Penilaian Warga Miskin </h3>
-                                <div class="row m-t-10">
-                                    <div class="col-md-12">
-                                        <div class="table-responsive m-b-40">
-                                            <table class="table table-hover">
-                                                <thead>
-                                                    <tr class="bg-dark" style="color: #fff;">
-                                                        <th>No</th>
-                                                        <th>Nama</th>
-                                                        <th>Nilai</th>
-                                                        <th>Ranking</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php $no = 1; if($hasilAkhir != null){foreach($hasilAkhir as $HAkey => $HAvalue) { ?>
-                                                    <tr>
-                                                        <td><?= $no ?></td>
-                                                        <td><?= $namaSamaNik[$HAkey]; ?></td>
-                                                        <td><?= $HAvalue; ?></td>
-                                                        <td><?= $no; ?></td>
-                                                    </tr>
-                                                    <?php $no++; }}	 ?>
-                                                </tbody>
-                                            </table>
+                    <div class="col-md-12 col-lg-12">
+                    <?php $no = 1; if($hasilAkhir != null){foreach($hasilAkhir as $HAkey => $HAvalue) { ?>
+                                                    
+                                  
+                                        <div class="au-card au-card--no-shadow au-card--no-pad m-b-40 au-card--border">
+                                            <div class="au-card-title" style="background-image:url('images/bg-title-01.jpg');">
+                                                <div class="bg-overlay bg-overlay--blue"></div>
+                                                <h3>
+                                                    <i class="zmdi zmdi-account-calendar"></i><?php echo date("Y-m-d"); ?></h3>
+                                                <!-- <button class="au-btn-plus">
+                                                    <i class="zmdi zmdi-plus"></i>
+                                                </button> -->
+                                            </div>
+                                            <div class="au-task js-list-load au-task--border">
+                                                <div class="au-task__title">
+                                                    <p>Hasil Penilaian Warga <?= $namaSamaNik[$HAkey]; ?></p>
+                                                </div>
+                                                <div class=" js-scrollbar3">
+                                                    <div class="au-task__item au-task__item--primary">
+                                                        <div class="au-task__item-inner">
+                                                            <h5 class="task">
+                                                                <a href="#">Nilai</a>
+                                                            </h5>
+                                                            <span class="time"><?= $HAvalue; ?></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="au-task__item au-task__item--warning">
+                                                        <div class="au-task__item-inner">
+                                                            <h5 class="task">
+                                                                <a href="#">Ranking</a>
+                                                            </h5>
+                                                            <span class="time"><?= $no; ?></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="au-task__footer">
+                                                <p class="m-t-10">Untuk melihat hasil penilaian warga miskin dapat mengklik tombol lihat
+                                                        laporan yang berada dibawah, Terima kasih</p>
+                                                <br>
+                                                <form action="<?=base_url();?>index.php/user/index" method="POST">
+                                                    <input type="hidden" name="export" value="Lihat Hasil Penilaian" class="btn btn-info m-t-20">
+                                                        <button type="submit" class="au-btn au-btn-load ">Lihat hasil penilaian</button>
+                                                </form>   
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <p class="m-t-10">Untuk melihat hasil penilaian warga miskin dapat mengklik tombol lihat
-                                    laporan yang berada dibawah, Terima kasih</p>
-                                <form action="<?=base_url();?>index.php/user/index" method="POST">
-                                    <input type="submit" name="export" value="Lihat Hasil Penilaian"
-                                        class="btn btn-info m-t-20">
-                                </form>
-                                <!-- </center> -->
-                            </div>
-                            <!-- END TOP CAMPAIGN-->
-                        </div>
+                                    <?php $no++; }}	 ?>
                     </div>
+                
                 </div>
             </section>
             <section class="p-t-60 p-b-20">
