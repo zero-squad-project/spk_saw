@@ -2,7 +2,9 @@
     <div class="section__content section__content--p30">
         <div class="container-fluid">
             <div class="header-wrap">
-                <div class="header-button">
+                <div class="header__logo">
+                </div>
+                <div class="header__tool">
                     <div class="noti-wrap">
                     <div class="account-wrap">
                         <div class="account-item clearfix js-item-menu">

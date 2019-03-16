@@ -16,7 +16,9 @@
 
 <body class="animaition">
     <div class="page-wrapper">
+      
         <!-- HEADER DESKTOP-->
+        
         <header class="header-desktop3 d-none d-lg-block">
             <div class="section__content section__content--p35">
                 <div class="header3-wrap">
@@ -25,8 +27,7 @@
                             alt="CoolAdmin" />
                         <h3 style="margin-left:10px; color: white"> SPK Bekerja</h3>
                     </div>
-                    <div class="header__navbar">
-                    </div>
+                   
                     <div class="header__tool">
                         <div class="noti-wrap">
                             <div class="account-wrap">
@@ -50,6 +51,41 @@
                 </div>
             </div>
         </header>
+
+        <!---HEADER MOBILE-->
+        <header class="header-mobile header-mobile-2 d-block d-lg-none">
+            <div class="section__content section__content--p35">
+                <div class="header3-wrap">
+                    <div class="header__logo">
+                        <img src="<?=base_url();?>assets/img/brebes_logo.png" width="46px" height="52px"
+                            alt="CoolAdmin" />
+                        <h3 style="margin-left:10px; color: white"> SPK Bekerja</h3>
+                    </div>
+                   
+                    <div class="header__tool">
+                        <div class="noti-wrap">
+                            <div class="account-wrap">
+                                <div class="account-item account-item--style2 clearfix js-item-menu">
+                                    <div class="image">
+                                        <img src="<?=base_url();?>assets/img/icon/avatar-01.png" alt="John Doe" />
+                                    </div>
+                                    <div class="content">
+                                    </div>
+                                    <div class="account-dropdown js-dropdown">
+                                        <div class="account-dropdown__footer">
+                                            <a
+                                                href="<?= base_url(); ?>index.php/<?=$this->session->userdata('level')?>/logout">
+                                                <i class="zmdi zmdi-power"></i>Logout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+      
         <div class="page-content--bgf7">
             <section class="au-breadcrumb2">
                 <div class="container">
@@ -161,7 +197,8 @@
                 </div>
             </section>
         </div>
-    </div>
+        </div>
+    
     <?php $this->load->view('master/js'); ?>
 </body>
 

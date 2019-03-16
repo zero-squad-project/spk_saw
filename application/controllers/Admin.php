@@ -190,36 +190,48 @@ class Admin extends MY_Controller
 
             redirect(base_url('index.php/admin/data_pegawai'));
         } else {
-            $data = array(
-                'nip' => $nip,
-                'nama' => $nama,
-                'jabatan' => $jabatan
-            );
-            $dataa = array(
-                'nip' => $nip,
-                'password' => 'admin'
-            );
-            $simpan = $this->DataModel->insert('data_pegawai',$data);
-            $simpan = $this->DataModel->insert('admin',$dataa);
-            if($simpan){
-                $this->session->set_flashdata('pesan', '<div class="sufee-alert alert with-close alert-primary alert-dismissible fade show">
-                                                        <span class="badge badge-pill badge-primary">Success</span>
-                                                        Berhasil Menambahkan
+            if(is_numeric($nip)){
+                $data = array(
+                    'nip' => $nip,
+                    'nama' => $nama,
+                    'jabatan' => $jabatan
+                );
+                $dataa = array(
+                    'nip' => $nip,
+                    'password' => 'admin'
+                );
+                $simpan = $this->DataModel->insert('data_pegawai',$data);
+                $simpan = $this->DataModel->insert('admin',$dataa);
+                if($simpan){
+                    $this->session->set_flashdata('pesan', '<div class="sufee-alert alert with-close alert-primary alert-dismissible fade show">
+                                                            <span class="badge badge-pill badge-primary">Success</span>
+                                                            Berhasil Menambahkan
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button></div>');
+    
+                    redirect(base_url('index.php/admin/data_pegawai'));
+                }else{
+                    $this->session->set_flashdata('pesan', '<div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                                                        <span class="badge badge-pill badge-danger">Success</span>
+                                                        Gagal Menyimpan Perubahan Pastikan Semua Terisi dengan benar !
                                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                         </button></div>');
-
-                redirect(base_url('index.php/admin/data_pegawai'));
+    
+                    redirect(base_url('index.php/admin/data_pegawai'));
+                }
             }else{
                 $this->session->set_flashdata('pesan', '<div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
-                                                    <span class="badge badge-pill badge-danger">Success</span>
-                                                    Gagal Menyimpan Perubahan Pastikan Semua Terisi dengan benar !
-                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                    </button></div>');
+                <span class="badge badge-pill badge-danger">Success</span>
+                NIP / NIK harus angka
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button></div>');
 
                 redirect(base_url('index.php/admin/data_pegawai'));
             }
+            
         }
     }
 
@@ -244,82 +256,95 @@ class Admin extends MY_Controller
 
             redirect(base_url('index.php/admin/data_penduduk'));
         } else {
-            $data = array(
-                'nik' => $nik,
-                'nama' => $nama,
-                'alamat' => $alamat,
-                'tanggungan' => $tanggungan,
-                'sudah_dinilai' => 1
-            );
-            $dataa = array(
-                'nik' => $nik,
-                'password' => 'user'
-            );
-             $this->DataModel->getWhere('nik',$nik);
-             $cek_nik = $this->DataModel->getData('data_penduduk')->row();
-            if($cek_nik > 0){
-                $this->session->set_flashdata('pesan', '<div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
-                                                    <span class="badge badge-pill badge-danger">Peringatan</span>
-                                                    Nik Sudah ada
-                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                    </button></div>');
-
-            redirect(base_url('index.php/admin/data_penduduk'));
-            }else{
-                $simpan = $this->DataModel->insert('data_penduduk',$data);
-                $simpan = $this->DataModel->insert('user',$dataa);
-            if($simpan){
-                 //nilai
-                   // $nik = $_POST['nik'];
-                    $idKriteria = $_POST['kriteria'];
-                    $idSubkriteria =$_POST['subkriteria'];
-
-                    $data = array();
-                    $index = 0;
-                    foreach($idKriteria as $datanik){
-                        array_push(
-                            $data, array(
-                                'nikPenduduk' => $nik,
-                                'idKriteria' => $idKriteria[$index],
-                                'id_subKriteria' => $idSubkriteria[$index]
-                            
-                            ));
-                            $index++;
-                    }
-                    $simpan = $this->DataModel->save_batch('nilai',$data);
-                    if($simpan){
-                        $this->session->set_flashdata('pesan', '<div class="sufee-alert alert with-close alert-primary alert-dismissible fade show">
-                        <span class="badge badge-pill badge-primary">Success</span>
-                        Berhasil Menambahkan
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button></div>');
-
-                        redirect(base_url('index.php/admin/data_penduduk'));
-                    }else{
-
-                        $this->session->set_flashdata('pesan', '<div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
-                                                        <span class="badge badge-pill badge-danger">Success</span>
-                                                        Gagal Menyimpan Perubahan Pastikan Semua Terisi dengan benar !
+            if(is_numeric($nik)){
+                $data = array(
+                    'nik' => $nik,
+                    'nama' => $nama,
+                    'alamat' => $alamat,
+                    'tanggungan' => $tanggungan,
+                    'sudah_dinilai' => 1
+                );
+                $dataa = array(
+                    'nik' => $nik,
+                    'password' => 'user'
+                );
+                 $this->DataModel->getWhere('nik',$nik);
+                 $cek_nik = $this->DataModel->getData('data_penduduk')->row();
+                if($cek_nik > 0){
+                    $this->session->set_flashdata('pesan', '<div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                                                        <span class="badge badge-pill badge-danger">Peringatan</span>
+                                                        Nik Sudah ada
                                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                         </button></div>');
-
-                        redirect(base_url('index.php/admin/data_penduduk'));
-                    }
-                    
+    
+                redirect(base_url('index.php/admin/data_penduduk'));
+                }else{
+                    $simpan = $this->DataModel->insert('data_penduduk',$data);
+                    $simpan = $this->DataModel->insert('user',$dataa);
+                if($simpan){
+                     //nilai
+                       // $nik = $_POST['nik'];
+                        $idKriteria = $_POST['kriteria'];
+                        $idSubkriteria =$_POST['subkriteria'];
+    
+                        $data = array();
+                        $index = 0;
+                        foreach($idKriteria as $datanik){
+                            array_push(
+                                $data, array(
+                                    'nikPenduduk' => $nik,
+                                    'idKriteria' => $idKriteria[$index],
+                                    'id_subKriteria' => $idSubkriteria[$index]
+                                
+                                ));
+                                $index++;
+                        }
+                        $simpan = $this->DataModel->save_batch('nilai',$data);
+                        if($simpan){
+                            $this->session->set_flashdata('pesan', '<div class="sufee-alert alert with-close alert-primary alert-dismissible fade show">
+                            <span class="badge badge-pill badge-primary">Success</span>
+                            Berhasil Menambahkan
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button></div>');
+    
+                            redirect(base_url('index.php/admin/data_penduduk'));
+                        }else{
+    
+                            $this->session->set_flashdata('pesan', '<div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                                                            <span class="badge badge-pill badge-danger">Success</span>
+                                                            Gagal Menyimpan Perubahan Pastikan Semua Terisi dengan benar !
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button></div>');
+    
+                            redirect(base_url('index.php/admin/data_penduduk'));
+                        }
+                        
+                }else{
+                    $this->session->set_flashdata('pesan', '<div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                                                            <span class="badge badge-pill badge-danger">Success</span>
+                                                            Gagal Menyimpan Perubahan Pastikan Semua Terisi dengan benar !
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button></div>');
+    
+                    redirect(base_url('index.php/admin/data_penduduk'));
+                }
+                }
             }else{
                 $this->session->set_flashdata('pesan', '<div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
-                                                        <span class="badge badge-pill badge-danger">Success</span>
-                                                        Gagal Menyimpan Perubahan Pastikan Semua Terisi dengan benar !
-                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                        </button></div>');
+                <span class="badge badge-pill badge-danger">Success</span>
+                NIP / NIK harus angka
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button></div>');
 
                 redirect(base_url('index.php/admin/data_penduduk'));
             }
-            }
+
+            
         }
     }
 
